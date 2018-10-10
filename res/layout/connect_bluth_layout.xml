@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/login_background"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/login_sl_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none">
+
+        <com.mapbar.scale.ScaleRelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <com.mapbar.scale.ScaleRelativeLayout
+                android:id="@+id/speedLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/nav_ic_speed_limit_g"
+                android:orientation="vertical">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:id="@+id/weidthStr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:text="----"
+                    android:textColor="#075DFF"
+                    android:textSize="16dp" />
+
+            </com.mapbar.scale.ScaleRelativeLayout>
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:id="@+id/wuliaoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/speedLayout"
+                android:orientation="vertical">
+
+            </com.mapbar.scale.ScaleLinearLayout>
+
+            <com.mapbar.scale.ScaleImageView
+                android:id="@+id/addView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/wuliaoLayout"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/add"
+                android:visibility="gone" />
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:id="@+id/licensesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addView"
+                android:gravity="center_vertical"
+                android:background="@android:color/black"
+                android:orientation="horizontal">
+                <com.mapbar.scale.ScaleTextView
+                    android:id="@+id/licensesFileStr"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:textSize="22dp"
+                    android:textColor="@android:color/black"
+                    android:text="收据图片"/>
+
+
+                <com.mapbar.scale.ScaleImageView
+                    android:id="@+id/licensesFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/add_note_icon" />
+
+            </com.mapbar.scale.ScaleLinearLayout>
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:id="@+id/noHeGeViewLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/licensesLayout"
+                android:orientation="vertical"
+                android:visibility="gone" />
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:id="@+id/commitLayout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/noHeGeViewLayout"
+                android:layout_margin="10dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:id="@+id/commitHeGe"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:text="提交合格物料"
+                    android:textColor="@android:color/black"
+                    android:textSize="19dp" />
+
+                <com.mapbar.scale.ScaleTextView
+                    android:id="@+id/commitNoHeGe"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:text="提交不合格物料"
+                    android:textColor="@android:color/black"
+                    android:textSize="19dp" />
+            </com.mapbar.scale.ScaleLinearLayout>
+
+
+        </com.mapbar.scale.ScaleRelativeLayout>
+    </ScrollView>
+
+
+</com.mapbar.scale.ScaleRelativeLayout>
