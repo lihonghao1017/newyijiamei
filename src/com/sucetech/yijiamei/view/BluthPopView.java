@@ -1,41 +1,57 @@
 package com.sucetech.yijiamei.view;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-
 import com.sucetech.yijiamei.R;
-import com.sucetech.yijiamei.bean.WuLiaoBean;
+import com.sucetech.yijiamei.UserMsg;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
- * Created by lihh on 2018/9/20.
+ * Created by lihh on 2018/10/5.
  */
 
-public class SuggistPopView extends PopupWindow {
+public class BluthPopView extends PopupWindow {
     private LayoutInflater inflater;
     private ListView mListView;
-    private List<WuLiaoBean> list;
     private MyAdapter mAdapter;
-    private OnSuggistItemClick clickListener;
+    private OnSelectedBluthClick clickListener;
+    private List<BluetoothDevice> deviceList;
 
-    public SuggistPopView(Context context, List<WuLiaoBean> list, OnSuggistItemClick clickListener) {
+    public BluthPopView(Context context, OnSelectedBluthClick clickListener) {
         super(context);
         inflater = LayoutInflater.from(context);
-        this.list=list;
+        Set<BluetoothDevice> devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
+        if (devices.size() > 0) {
+            deviceList = new ArrayList<>();
+            for (BluetoothDevice device : devices) {
+                Log.e("LLL", "device.getName()" + device.getName());
+                Log.e("LLL", "device.getAddress()" + device.getAddress());
+                deviceList.add(device);
+//                mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+            }
+        }
         init();
         this.clickListener = clickListener;
     }
-    public void updataData(){
+
+    public void updataData() {
         mAdapter.notifyDataSetChanged();
     }
 
@@ -45,7 +61,7 @@ public class SuggistPopView extends PopupWindow {
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         setFocusable(true);
-        ColorDrawable dw = new ColorDrawable(0x00);
+        ColorDrawable dw = new ColorDrawable(0x000000);
         setBackgroundDrawable(dw);
         mListView = (ListView) view.findViewById(R.id.listview);
         mListView.setAdapter(mAdapter = new MyAdapter());
@@ -55,12 +71,12 @@ public class SuggistPopView extends PopupWindow {
     private class MyAdapter extends BaseAdapter {
         @Override
         public int getCount() {
-            return list.size();
+            return deviceList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return list.get(position);
+            return deviceList.get(position);
         }
 
         @Override
@@ -79,22 +95,21 @@ public class SuggistPopView extends PopupWindow {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            holder.tvName.setText(list.get(position).name);
+            holder.tvName.setText(deviceList.get(position).getName() + "--" + deviceList.get(position).getAddress());
             holder.tvName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (clickListener != null) {
-                        clickListener.onSuggistItemClick(position,list.get(position).name);
+                        clickListener.OnBluthItemClick(deviceList.get(position).getAddress());
                     }
                 }
             });
-
             return convertView;
         }
     }
 
-    public interface OnSuggistItemClick {
-        public void onSuggistItemClick(int position, String str);
+    public interface OnSelectedBluthClick {
+        public void OnBluthItemClick(String mac);
     }
 
     private class ViewHolder {

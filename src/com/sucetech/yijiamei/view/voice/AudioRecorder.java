@@ -2,6 +2,7 @@ package com.sucetech.yijiamei.view.voice;
 
 import android.media.MediaRecorder;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class AudioRecorder implements RecordStrategy {
 		fileName = getCurrentDate();
 		recorder = new MediaRecorder();
 		recorder.setOutputFile(fileFolder + "/" + fileName + ".amr");
-		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 设置MediaRecorder的音频源为麦克风
+		recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);// 设置MediaRecorder的音频源为麦克风
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);// 设置MediaRecorder录制的音频格式
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);// 设置MediaRecorder录制音频的编码为amr
 	}
@@ -67,10 +68,34 @@ public class AudioRecorder implements RecordStrategy {
 	public void stop() {
 		// TODO Auto-generated method stub
 		if (isRecording) {
-			recorder.stop();
+			try {
+				//下面三个参数必须加，不加的话会奔溃，在mediarecorder.stop();
+				//报错为：RuntimeException:stop failed
+				recorder.setOnErrorListener(null);
+				recorder.setOnInfoListener(null);
+				recorder.setPreviewDisplay(null);
+				recorder.stop();
+			} catch (IllegalStateException e) {
+				// TODO: handle exception
+				Log.i("Exception", Log.getStackTraceString(e));
+			}catch (RuntimeException e) {
+				// TODO: handle exception
+				Log.i("Exception", Log.getStackTraceString(e));
+			}catch (Exception e) {
+				// TODO: handle exception
+				Log.i("Exception", Log.getStackTraceString(e));
+			}
+			//added by ouyang end
+
 			recorder.release();
 			isRecording = false;
 		}
+
+
+//		recorder.stop();
+//			recorder.release();
+//			isRecording = false;
+//		}
 
 	}
 

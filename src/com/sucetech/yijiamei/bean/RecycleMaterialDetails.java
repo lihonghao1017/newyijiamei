@@ -22,6 +22,7 @@ public class RecycleMaterialDetails {
      * 重量
      */
     public Float weight;
+    public String price;
 
     /**
      * 体积
@@ -33,5 +34,4 @@ public class RecycleMaterialDetails {
      */
     public Byte flowType;
 
-    public boolean isOK;
 }

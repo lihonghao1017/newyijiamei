@@ -11,7 +11,7 @@ public class RecycleMaterial {
     /**
      * 医疗机构Id
      */
-    public Integer medicalId;
+    public int medicalId;
 
     /**
      * 回收执照编号
@@ -26,7 +26,7 @@ public class RecycleMaterial {
     /**
      * 回收人员Id(移动端传登录后的用户Id)
      */
-    private Integer recycleUserId;
+    public Integer recycleUserId;
 
     /**
      * 回收时间,可以不传
@@ -51,7 +51,7 @@ public class RecycleMaterial {
     /**
      * 状态,可以不传
      */
-    private Byte status;
+    public Byte status;
 
     /**
      * 打包人员

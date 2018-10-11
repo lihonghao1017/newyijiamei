@@ -6,27 +6,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.error.VolleyError;
-import com.android.volley.toolbox.Volley;
-import com.auth0.android.jwt.Claim;
-import com.auth0.android.jwt.JWT;
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.UserMsg;
 import com.sucetech.yijiamei.manager.EventStatus;
-import com.sucetech.yijiamei.request.LoginRequest;
+import com.sucetech.yijiamei.utils.TaskManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by lihh on 2018/9/19.
@@ -67,75 +63,113 @@ public class LoginView extends BaseView implements View.OnClickListener {
             ((MainActivity)getContext()).showProgressDailogView("登陆中...");
             UserMsg.saveUserName(user.getText().toString());
             UserMsg.savePwd(pwd.getText().toString());
-            requestLogin();
+            TaskManager.getInstance().addTask(new Runnable() {
+                @Override
+                public void run() {
+                    requestLoing2();
+                }
+            });
+
         }
     }
     private String TAG="LLL";
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private String requestLoing2() {
 
-    private void  requestLogin(){
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        JSONObject jsonObject=new JSONObject();
+        JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("username",UserMsg.getUserName());
-            jsonObject.put("password",UserMsg.getPwd());
+            jsonObject.put("username", UserMsg.getUserName());
+            jsonObject.put("password", UserMsg.getPwd());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        LoginRequest jsonRequest = new LoginRequest(Request.Method.POST,"http://60.205.139.90:81/api/v1/yijiamei/login", jsonObject,
-                new Response.Listener<JSONObject>() {
+        RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
+        Request request = new Request.Builder()
+                .url("http://60.205.139.90:81/api/v1/yijiamei/login")
+                .post(body)
+                .build();
+        try {
+            final Response response = ((MainActivity)getContext()).client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                Log.e("LLL","chenggong--->");
+                UserMsg.saveToken(response.header("Authorization"));
+                Log.e("LLL","Token-->"+UserMsg.getToken());
+                requestYiyuan();
+                this.post(new Runnable() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            ((MainActivity)getContext()).hideProgressDailogView();
-                            UserMsg.saveToken(response.getString("Authorization"));
-                            mEventManager.notifyObservers(EventStatus.logined,null);
-                            LoginView.this.setVisibility(View.GONE);
-//                            String token=response.getString("Authorization").replace("Bearer","");
-//                            JWT jwt = new JWT(token);
-//                            Claim claim=jwt.getClaim("userInfo");
-//                            Log.e(TAG, "claim.asString() -> " + claim.asString());
-//                            Date expiresAt = jwt.getExpiresAt();
-//                            Log.e(TAG, "claim.asString() -> " + expiresAt.toString());
-//                            boolean isExpired = jwt.isExpired(10); // 10 seconds leeway
-//                            Log.e(TAG, "claim.isExpired() -> " + isExpired);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void run() {
+                        ((MainActivity)getContext()).hideProgressDailogView();
+                        mEventManager.notifyObservers(EventStatus.logined,null);
+                        LoginView.this.setVisibility(View.GONE);
+//                        mEventManager.notifyObservers(EventStatus.logined,null);
+                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, error.getMessage(), error);
+                });
+//
+                return response.body().string();
+            } else {
+                Log.e("LLL","shibai--->");
+
+                this.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((MainActivity)getContext()).hideProgressDailogView();
+                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
+                    }
+                });
+//                Toast.makeText(getContext(),"shibai -->"+response.message(),Toast.LENGTH_LONG);
+                throw new IOException("Unexpected code " + response);
             }
-        })
-        {
-            //注意此处override的getParams()方法,在此处设置post需要提交的参数根本不起作用
-            //必须象上面那样,构成JSONObject当做实参传入JsonObjectRequest对象里
-            //所以这个方法在此处是不需要的
-//    @Override
-//    protected Map<String, String> getParams() {
-//          Map<String, String> map = new HashMap<String, String>();
-//            map.put("name1", "value1");
-//            map.put("name2", "value2");
-
-//        return params;
-//    }
-
-            @Override
-            public Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Accept", "application/json");
-                headers.put("Content-Type", "application/json; charset=UTF-8");
-
-                return headers;
-            }
-        };
-        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(
-                10 * 1000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(jsonRequest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
+    private void requestYiyuan() {
 
+
+//        RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
+        Request request = new Request.Builder()
+                .header("Authorization", UserMsg.getToken())
+                .addHeader("Accept", "application/json")
+                .url("http://60.205.139.90:81/api/v1/yijiamei/medical/")
+                .get()
+                .build();
+        try {
+            final Response response = ((MainActivity)getContext()).client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                Log.e("LLL","chenggong--requestYiyuan->");
+//                Log.e("LLL","chenggong--requestYiyuan22->"+response.body().string());
+                UserMsg.saveYiyuan(response.body().string());
+                Log.e("LLL","chenggong--requestYiyuan->"+UserMsg.getYiyuan());
+                this.post(new Runnable() {
+                    @Override
+                    public void run() {
+//                        ((MainActivity)getContext()).hideProgressDailogView();
+//                        UserMsg.saveToken(response.header("Authorization"));
+//                        mEventManager.notifyObservers(EventStatus.logined,null);
+//                        LoginView.this.setVisibility(View.GONE);
+//                        mEventManager.notifyObservers(EventStatus.logined,null);
+                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
+                    }
+                });
+//
+//                return response.body().string();
+            } else {
+                Log.e("LLL","shibai---requestYiyuan>");
+//                ((MainActivity)getContext()).hideProgressDailogView();
+                this.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(),"shibai --requestYiyuan>",Toast.LENGTH_LONG);
+                    }
+                });
+//                Toast.makeText(getContext(),"shibai -->"+response.message(),Toast.LENGTH_LONG);
+                throw new IOException("Unexpected code " + response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

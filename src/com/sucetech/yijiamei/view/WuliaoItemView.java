@@ -26,12 +26,13 @@ import java.util.List;
 
 public class WuliaoItemView extends BaseView implements View.OnClickListener, SuggistPopView.OnSuggistItemClick {
     private TextView name, beishu, weight, ok, price, volume;
-    private String weightStr;
+    private String weightStr="6.6";
     public float commitWeightStr;
     public WuLiaoBean wuLiaoBean;
     private SuggistPopView mSuggistPopView;
     private List<WuLiaoBean> datas;
     public RecycleMaterialDetails recycleMaterialDetails;
+    public boolean isOK;
 
     public WuliaoItemView(Context context, ViewGroup ParentView) {
         super(context, ParentView);
@@ -58,7 +59,7 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
         name.setOnClickListener(this);
         beishu = (TextView) v.findViewById(R.id.beishu);
         weight = (TextView) v.findViewById(R.id.weight);
-        price = (TextView) v.findViewById(R.id.price);
+        price = (TextView) v.findViewById(R.id.wuliaoPrice);
         volume = (TextView) v.findViewById(R.id.volume);
         ok = (TextView) v.findViewById(R.id.ok);
         ok.setOnClickListener(this);
@@ -83,19 +84,19 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ok:
-                if (recycleMaterialDetails.isOK) {
+                if (isOK) {
                     prentView.removeView(this);
                 } else {
-                    if (volume.getText().toString()!=null&&volume.getText().toString().equals("")){
-                        Toast.makeText(getContext(),"请填写体积",Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    if (recycleMaterialDetails.type<=0){
+//                    if (volume.getText().toString()!=null&&volume.getText().toString().equals("")){
+//                        Toast.makeText(getContext(),"请填写体积",Toast.LENGTH_LONG).show();
+//                        return;
+//                    }
+                    if (recycleMaterialDetails.type<0){
                         Toast.makeText(getContext(),"请选择类型",Toast.LENGTH_LONG).show();
                         return;
                     }
 
-                    recycleMaterialDetails.isOK= true;
+                    isOK= true;
                     ok.setText("删除");
                     float www = Float.valueOf(0);
                     if (beishu.getText().toString() != null && !beishu.getText().toString().equals("")) {
@@ -105,8 +106,13 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
                     }
                     weight.setText(www + "");
                     beishu.setEnabled(false);
-                    recycleMaterialDetails.volume = volume.getText().toString();
+//                    recycleMaterialDetails.volume = volume.getText().toString();
                     recycleMaterialDetails.weight = www;
+                    if (price.getText()!=null&&!price.getText().toString().equals("")){
+                        recycleMaterialDetails.price=price.getText().toString();
+                    }else{
+                        recycleMaterialDetails.price="0";
+                    }
                 }
                 break;
             case R.id.name:

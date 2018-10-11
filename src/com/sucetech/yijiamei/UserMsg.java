@@ -26,6 +26,15 @@ public class UserMsg {
     public static String getToken() {
         return sp.getString("Token", "");
     }
+    public static void saveYiyuan(String yiyuan){
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("yiyuan", yiyuan);
+        edit.commit();
+
+    }
+    public static String getYiyuan(){
+        return sp.getString("yiyuan", "");
+    }
     public static void saveUserName(String  name) {
         SharedPreferences.Editor edit = sp.edit();
         edit.putString("UserName", name);
@@ -41,14 +50,14 @@ public class UserMsg {
         edit.commit();
     }
 
-    public static String getMac() {
-        return sp.getString("Mac", "");
-    }
-
     public static void saveMac(String  pwd) {
         SharedPreferences.Editor edit = sp.edit();
         edit.putString("Mac", pwd);
         edit.commit();
+    }
+
+    public static String getMac() {
+        return sp.getString("Mac", "");
     }
 
     public static String getPwd() {

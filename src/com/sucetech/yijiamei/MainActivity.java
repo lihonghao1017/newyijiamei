@@ -14,16 +14,25 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.sucetech.yijiamei.bean.FormImage;
+import com.sucetech.yijiamei.manager.EventManager;
+import com.sucetech.yijiamei.manager.EventStatus;
+import com.sucetech.yijiamei.utils.BitmapUtils;
 import com.sucetech.yijiamei.utils.PhotoUtils;
 import com.sucetech.yijiamei.view.ConBluthView;
 import com.sucetech.yijiamei.view.ProgressDailogView;
 import com.sucetech.yijiamei.view.ToastView;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 public class MainActivity extends Activity {
     public ConBluthView mConBluthView;
@@ -41,16 +50,20 @@ public class MainActivity extends Activity {
     private Uri cropImageUri;
     private static final int OUTPUT_X = 480;
     private static final int OUTPUT_Y = 480;
+    public final OkHttpClient client = new OkHttpClient().newBuilder()
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .build();
 
     //    private ToastView toastView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        showContacts();
+        initLogs();
         setContentView(R.layout.activity_main);
         mConBluthView = (ConBluthView) findViewById(R.id.connectBloth);
         progressDailogView = (ProgressDailogView) findViewById(R.id.progressDailogView);
 //        toastView= (ToastView) findViewById(R.id.myToast);
-        isOK();
     }
 
     private File creatFile() {
@@ -73,14 +86,22 @@ public class MainActivity extends Activity {
                 mConBluthView.startBlouth(scanResult);
             } else if (requestCode == CODE_CAMERA_REQUEST) {
 //                Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri, this);
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 32;
-                options.outWidth=120;
-                options.outHeight=120;
-                Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
-                if (mConBluthView != null) {
-                    mConBluthView.showImages(bitmap, fileUri,pictureId);
-                }
+                String newFile = fileUri.getParent() + "yijiamei_" + fileUri.getName();
+                Bitmap bitmap = BitmapUtils.getSmallBitmap(fileUri.getPath(), 480, 480, new File(newFile));
+//                img_src.setImageBitmap(smallBitmap);
+//                BitmapFactory.Options options = new BitmapFactory.Options();
+//                options.inSampleSize = 32;
+//                options.outWidth = 120;
+//                options.outHeight = 120;
+//                Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
+                FormImage formImage = new FormImage();
+                formImage.mBitmap = bitmap;
+                formImage.mFileName = newFile;
+                formImage.id = id;
+//                if (mConBluthView != null) {
+//                    mConBluthView.showImages(bitmap, fileUri,id);
+//                }
+                EventManager.getEventManager().notifyObservers(EventStatus.imgMsg, formImage);
 //                fileCropUri=creatFile();
 //                cropImageUri = Uri.fromFile(fileCropUri);
 //                PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, OUTPUT_X, OUTPUT_Y, CODE_RESULT_REQUEST);
@@ -112,47 +133,6 @@ public class MainActivity extends Activity {
         progressDailogView.setVisibility(View.GONE);
     }
 
-    /**
-     * 自动获取相机权限
-     */
-    public void autoObtainCameraPermission() {
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-//                ToastUtils.showShort(this, "您已经拒绝过一次");
-            }
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, CAMERA_PERMISSIONS_REQUEST_CODE);
-        } else {//有权限直接调用系统相机拍照
-            if (hasSdcard()) {
-                fileUri = creatFile();
-                imageUri = Uri.fromFile(fileUri);
-                //通过FileProvider创建一个content类型的Uri
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    imageUri = FileProvider.getUriForFile(MainActivity.this, "com.sucetech.yijiamei", fileUri);
-                }
-                PhotoUtils.takePicture(this, imageUri, CODE_CAMERA_REQUEST);
-            } else {
-                Toast.makeText(this, "设备没有SD卡！", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-    private int pictureId;
-    public void takePicture(int id){
-        pictureId=id;
-        if (hasSdcard()) {
-            fileUri = creatFile();
-            imageUri = Uri.fromFile(fileUri);
-            //通过FileProvider创建一个content类型的Uri
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                imageUri = FileProvider.getUriForFile(MainActivity.this, "com.sucetech.yijiamei", fileUri);
-            }
-            PhotoUtils.takePicture(this, imageUri, CODE_CAMERA_REQUEST);
-        } else {
-            Toast.makeText(this, "设备没有SD卡！", Toast.LENGTH_LONG).show();
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -196,40 +176,68 @@ public class MainActivity extends Activity {
         String state = Environment.getExternalStorageState();
         return state.equals(Environment.MEDIA_MOUNTED);
     }
-    public void isOK(){
-        int osVersion = Integer.valueOf(android.os.Build.VERSION.SDK);
-        if (osVersion>22){
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                //申请WRITE_EXTERNAL_STORAGE权限
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.CAMERA,
-                        Manifest.permission.RECORD_AUDIO},
-                        6666);
-            }else{
+
+    private int id;
+
+    public void requestPicture(int id) {
+        this.id = id;
+        if (hasSdcard()) {
+            fileUri = creatFile();
+            imageUri = Uri.fromFile(fileUri);
+            //通过FileProvider创建一个content类型的Uri
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                imageUri = FileProvider.getUriForFile(MainActivity.this, "com.sucetech.yijiamei", fileUri);
             }
-        }else{
-            //如果SDK小于6.0则不去动态申请权限
+            PhotoUtils.takePicture(this, imageUri, CODE_CAMERA_REQUEST);
+        } else {
+            Toast.makeText(this, "设备没有SD卡！", Toast.LENGTH_LONG).show();
         }
-//        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            //申请WRITE_EXTERNAL_STORAGE权限
-//            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE},
-//                    WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
-//        }else{
-//            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE},
-//                    WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
-//        }
     }
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-////        if (requestCode == WRITE_EXTERNAL_STORAGE_REQUEST_CODE) {
-////
-////            getImei();
-////            Toast.makeText(getApplicationContext(),"授权成功",Toast.LENGTH_SHORT).show();
-////        }else{
-////            Toast.makeText(getApplicationContext(),"授权拒绝",Toast.LENGTH_SHORT).show();
-////        }
-//    }
+
+    public void showContacts() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getApplicationContext(), "没有权限,请手动开启定位权限", Toast.LENGTH_SHORT).show();
+            // 申请一个（或多个）权限，并提供用于回调返回的获取码（用户定义）
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 333);
+        } else {
+            //   init();
+            // getLoc();
+        }
+    }
+
+    public static void initLogs() {//导航相关全日制
+
+        String sdcardPath = "/sdcard/yijiamei/";
+        File file = new File(sdcardPath);
+
+        if (!file.exists()) {
+            //通过file的mkdirs()方法创建目录中包含却不存在的文件夹
+            file.mkdirs();
+        }
+        try {
+            Time t = new Time();
+            t.setToNow();
+            String time = t.monthDay + "d" + t.hour + "h" + t.minute + "m"
+                    + t.second;
+            String logPath = sdcardPath + time + ".txt";
+            Runtime.getRuntime().exec("logcat -v long -f " + logPath);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 }

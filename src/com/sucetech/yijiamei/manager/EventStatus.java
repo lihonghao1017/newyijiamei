@@ -5,9 +5,10 @@ package com.sucetech.yijiamei.manager;
  */
 
 public enum EventStatus {
-   logined,
+    logined,
     loginFail,
     weight,
-   wuliaoList,
+    wuliaoList,
+    imgMsg,
 }
 
