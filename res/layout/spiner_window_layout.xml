@@ -2,21 +2,21 @@
 <com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0.6"
+    android:alpha="0.9"
     android:background="#000000"
     android:orientation="vertical">
 
-    <View
+   <!-- <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1" />-->
 
     <com.mapbar.scale.ScaleListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/white"
+        android:background="@android:color/black"
         android:cacheColorHint="#00000000"
         android:divider="#2D2D2E"
         android:dividerHeight="2dp"

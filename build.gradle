@@ -25,9 +25,12 @@ apply plugin: 'android'
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     compile 'com.auth0.android:jwtdecode:1.1.1'
-    compile 'dev.dworks.libs:volleyplus:+'
-//    compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     compile 'com.google.code.gson:gson:2.3'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation "commons-io:commons-io:+"
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.5'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
 }
 
 android {

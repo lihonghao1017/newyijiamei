@@ -2,20 +2,19 @@
 <com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
     android:orientation="vertical">
 
     <com.mapbar.scale.ScaleLinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22dp"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:text="不合格记录"/>
 
         <com.mapbar.scale.ScaleImageView
@@ -43,11 +42,8 @@
 
     </com.mapbar.scale.ScaleLinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@android:color/holo_red_dark" />
 
+<!--
     <com.sucetech.yijiamei.view.voice.RecordButton
         android:id="@+id/btn_record"
         android:layout_width="match_parent"
@@ -67,17 +63,19 @@
             android:id="@+id/voiceFile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/add_note_icon" />
+            android:textColor="@android:color/white"
+            android:textSize="16dp"/>
 
-        <com.mapbar.scale.ScaleImageView
+      &lt;!&ndash;  <com.mapbar.scale.ScaleImageView
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="22dp"
             android:layout_marginRight="22dp"
-            android:src="@drawable/delete" />
+            android:src="@drawable/delete" />&ndash;&gt;
 
 
     </com.mapbar.scale.ScaleLinearLayout>
+-->
 
 </com.mapbar.scale.ScaleLinearLayout>

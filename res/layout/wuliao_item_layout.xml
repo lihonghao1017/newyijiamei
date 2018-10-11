@@ -2,7 +2,6 @@
 <com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
     android:orientation="horizontal">
 
     <com.mapbar.scale.ScaleLinearLayout
@@ -20,23 +19,22 @@
 
             <com.mapbar.scale.ScaleTextView
                 android:id="@+id/namestr"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:gravity="center"
                 android:text="物料类型"
-                android:textColor="@android:color/black"
-                android:textSize="22dp" />
+                android:textColor="@android:color/white"
+                android:textSize="15dp" />
 
             <com.mapbar.scale.ScaleTextView
                 android:id="@+id/name"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:text="玻璃"
                 android:textColor="@android:color/black"
-                android:textSize="22dp" />
+                android:textSize="15dp" />
         </com.mapbar.scale.ScaleLinearLayout>
 
         <com.mapbar.scale.ScaleLinearLayout
@@ -48,24 +46,22 @@
 
             <com.mapbar.scale.ScaleTextView
                 android:id="@+id/beishustr"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:gravity="center"
                 android:text="物料倍数"
-                android:textColor="@android:color/black"
-                android:textSize="22dp" />
+                android:textColor="@android:color/white"
+                android:textSize="15dp" />
 
             <com.mapbar.scale.ScaleEditText
                 android:id="@+id/beishu"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:background="@android:color/white"
-                android:gravity="center"
                 android:inputType="number|numberDecimal"
                 android:text="1"
                 android:textColor="@android:color/black"
-                android:textSize="22dp" />
+                android:textSize="15dp" />
         </com.mapbar.scale.ScaleLinearLayout>
 
         <com.mapbar.scale.ScaleLinearLayout
@@ -76,63 +72,58 @@
             android:orientation="horizontal">
 
             <com.mapbar.scale.ScaleTextView
-                android:id="@+id/priceStr"
-                android:layout_width="100dp"
+                android:id="@+id/wuliaoPriceStr"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:gravity="center"
-                android:text="单价"
-                android:textColor="@android:color/black"
-                android:textSize="22dp" />
+                android:text="物料单价"
+                android:textColor="@android:color/white"
+                android:textSize="15dp" />
 
             <com.mapbar.scale.ScaleEditText
-                android:id="@+id/price"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
+                android:id="@+id/wuliaoPrice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:background="@android:color/white"
-                android:gravity="center"
                 android:inputType="number|numberDecimal"
-                android:text="1"
                 android:textColor="@android:color/black"
-                android:textSize="22dp" />
+                android:textSize="15dp" />
         </com.mapbar.scale.ScaleLinearLayout>
-
-
         <com.mapbar.scale.ScaleLinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="5dp"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <com.mapbar.scale.ScaleTextView
                 android:id="@+id/volumeStr"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:gravity="center"
-                android:text="体积"
-                android:textColor="@android:color/black"
-                android:textSize="22dp" />
+                android:text="物料体积"
+                android:textColor="@android:color/white"
+                android:textSize="15dp" />
 
             <com.mapbar.scale.ScaleEditText
                 android:id="@+id/volume"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:background="@android:color/white"
-                android:gravity="center"
-                android:inputType="number|numberDecimal"
                 android:hint="如1*2*3"
+                android:inputType="number|numberDecimal"
                 android:textColor="@android:color/black"
-                android:textSize="22dp" />
+                android:textSize="15dp" />
         </com.mapbar.scale.ScaleLinearLayout>
+
     </com.mapbar.scale.ScaleLinearLayout>
 
     <com.mapbar.scale.ScaleLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:gravity="center_vertical"
         android:orientation="vertical">
 

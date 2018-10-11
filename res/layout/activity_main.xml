@@ -2,6 +2,7 @@
 <com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/xianxingLayout"
     android:layout_width="match_parent"
+    android:background="@drawable/login_background"
     android:layout_height="match_parent">
 
     <com.sucetech.yijiamei.view.LoginView
@@ -13,12 +14,20 @@
     <com.sucetech.yijiamei.view.ConBluthView
         android:id="@+id/connectBloth"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <com.sucetech.yijiamei.view.WuLiaoCommitView
+        android:id="@+id/wuliaoCommitView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/connectBloth"
         android:visibility="gone"/>
     <com.sucetech.yijiamei.view.ProgressDailogView
         android:id="@+id/progressDailogView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:visibility="gone"/>
     <!--<com.sucetech.yijiamei.view.ToastView-->
         <!--android:id="@+id/myToast"-->

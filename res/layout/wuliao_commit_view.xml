@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--android:padding="20dp"-->
+        <com.mapbar.scale.ScaleLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chat_window_backgroud"
+            android:orientation="horizontal">
+
+            <com.mapbar.scale.ScaleButton
+                android:id="@+id/hegeBt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="合格"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <com.mapbar.scale.ScaleButton
+                android:id="@+id/noHegeBt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="不合格"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </com.mapbar.scale.ScaleLinearLayout>
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/licensesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chat_window_backgroud"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <com.mapbar.scale.ScaleLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择医院"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+                <com.mapbar.scale.ScaleTextView
+                    android:id="@+id/yiyuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/white"
+                    android:text="okokoko"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+            </com.mapbar.scale.ScaleLinearLayout>
+            <com.mapbar.scale.ScaleLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收据拍照"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+                <com.mapbar.scale.ScaleImageView
+                    android:id="@+id/licensesFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/add_note_icon" />
+            </com.mapbar.scale.ScaleLinearLayout>
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回收描述"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+                <com.mapbar.scale.ScaleEditText
+                    android:id="@+id/des"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/white"
+                    android:text="onebyone"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+            </com.mapbar.scale.ScaleLinearLayout>
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回收人员"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+                <com.mapbar.scale.ScaleEditText
+                    android:id="@+id/packager"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/white"
+                    android:text="laolitou"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+            </com.mapbar.scale.ScaleLinearLayout>
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回收价格"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+                <com.mapbar.scale.ScaleEditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/white"
+                    android:text="777"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+            </com.mapbar.scale.ScaleLinearLayout>
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="自检情况"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+                <com.mapbar.scale.ScaleEditText
+                    android:id="@+id/selfCheck"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@android:color/white"
+                    android:text="okokoko"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+            </com.mapbar.scale.ScaleLinearLayout>
+
+            <com.sucetech.yijiamei.view.voice.RecordButton
+                android:id="@+id/btn_record"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center" />
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/voiceFile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="16dp"/>
+        </com.mapbar.scale.ScaleLinearLayout>
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/wuliaoItemViews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chat_window_backgroud"
+            android:orientation="vertical">
+
+        </com.mapbar.scale.ScaleLinearLayout>
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/addView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/add"
+            android:visibility="visible" />
+
+
+
+        <com.sucetech.yijiamei.view.NoHeGeView
+            android:id="@+id/nohegeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chat_window_backgroud"
+            android:visibility="gone" />
+
+        <com.mapbar.scale.ScaleButton
+            android:id="@+id/commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chat_window_backgroud"
+            android:gravity="center"
+            android:text="提交"
+            android:textColor="@android:color/white"
+            android:textSize="22dp" />
+    </com.mapbar.scale.ScaleLinearLayout>
+</ScrollView>
