@@ -1,96 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/login_background"
-    android:orientation="vertical" >
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/login_sl_view"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:scrollbars="none">
+    <com.mapbar.scale.ScaleLinearLayout
+        android:id="@+id/logoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="#49C998"
+        android:gravity="center">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
+        <com.mapbar.scale.ScaleImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom" >
+            android:src="@drawable/newlogo" />
+    </com.mapbar.scale.ScaleLinearLayout>
 
-            <ImageView
-                android:id="@+id/login_iv_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="30dip"
-                android:layout_marginRight="30dip"
-                android:layout_marginTop="100dip"
-                android:src="@drawable/logo" />
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/userNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoLayout"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="80dp">
 
-            <RelativeLayout
-                android:id="@+id/userNameLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="50dip"
-                android:layout_below="@id/login_iv_logo"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="50dip"
-                android:background="@drawable/login_input_head" >
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/usernameIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/userdefluticon" />
 
-                <EditText
-                    android:id="@+id/username"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:background="@android:color/transparent"
-                    android:hint="输入账号"
-                    android:lines="1"
-                    android:singleLine="true"
-                    android:textSize="16sp" />
-            </RelativeLayout>
+        <com.mapbar.scale.ScaleEditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19dp"
+            android:layout_toRightOf="@id/usernameIcon"
+            android:background="@android:color/transparent"
+            android:hint="请输入用户名"
+            android:src="@drawable/userdefluticon"
+            android:textColor="@android:color/black"
+            android:textSize="23dp" />
 
-            <RelativeLayout
-                android:id="@+id/pwsLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="50dip"
-                android:layout_below="@id/userNameLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/login_input_head" >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/username"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@id/usernameIcon"
+            android:background="#BDBDBD" />
 
-                <EditText
-                    android:id="@+id/pwd"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:layout_marginRight="10dip"
-                    android:background="@android:color/transparent"
-                    android:hint="输入账号"
-                    android:lines="1"
-                    android:singleLine="true"
-                    android:textSize="16sp" />
-            </RelativeLayout>
-            <Button
-                android:id="@+id/commit"
-                android:layout_width="fill_parent"
-                android:layout_height="50dip"
-                android:layout_below="@id/pwsLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dip"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:layout_marginTop="15dip"
-                android:background="@drawable/login_submit_bt_selector"
-                android:text="登陆"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="16sp" />
-        </RelativeLayout>
-    </ScrollView>
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/pwdLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userNameLayout"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="44dp">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/pwdIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/userdefluticon" />
+
+        <com.mapbar.scale.ScaleEditText
+            android:id="@+id/pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19dp"
+            android:layout_toRightOf="@id/pwdIcon"
+            android:background="@android:color/transparent"
+            android:hint="密码"
+            android:src="@drawable/userdefluticon"
+            android:textColor="@android:color/black"
+            android:textSize="23dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/pwdIcon"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@id/pwdIcon"
+            android:background="#BDBDBD" />
+
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <com.mapbar.scale.ScaleButton
+        android:id="@+id/commit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pwdLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/commit_bj"
+        android:gravity="center"
+        android:text="登陆"
+        android:textColor="#ffffff"
+        android:textSize="25dp" />
 
 
-</RelativeLayout>
+</com.mapbar.scale.ScaleRelativeLayout>

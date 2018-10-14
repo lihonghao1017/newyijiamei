@@ -89,7 +89,7 @@ public class Bluetooth_Scale {
     	if (D) Log.d(TAG, "connect to: " + device);
 
         // Cancel any thread attempting to make a connection
-       // if (mState == STATE_CONNECTING) {		///Õâ¸öÅÐ¶ÏÊÇ·ñÐèÒª
+       // if (mState == STATE_CONNECTING) {		///ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Òª
             if (mConnectThread != null) 
             {
             	mConnectThread.cancel(); 
@@ -318,6 +318,11 @@ public class Bluetooth_Scale {
             while (sconnected) {
                 try {
                     // Read from the InputStream
+                    if (!mmSocket.isConnected()){
+                        Log.e("LLL","!mmSocket.isConnected()-->");
+                        connectionLost();
+                        return;
+                    }
                     bytes = mmInStream.read(buffer);
                     for(int i = 0; i < bytes; i++)
                     {
@@ -326,7 +331,7 @@ public class Bluetooth_Scale {
                     	{
                     	    if (i==0)continue;
                             if(buffer[i-1]==0x0d)pStrdata--;
-                            strdata[pStrdata]=0;    //±íÊ¾½áÊø
+                            strdata[pStrdata]=0;    //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
                             Bundle b=new Bundle();
                             b.putByteArray("weight",strdata);
              	        	Message message=new Message();

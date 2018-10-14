@@ -2,3 +2,17 @@
 /bin
 /build
 /gen
+/res/drawable-xhdpi/userdeflutIcon.png
+/res/drawable-xxhdpi/commit_bj.png
+/res/drawable-xxhdpi/head.png
+/res/drawable-xxhdpi/newlogo.png
+/res/drawable-xxhdpi/pwdicon.png
+/res/drawable-xxhdpi/userdefluticon.png
+/res/drawable-xhdpi/pwdicon.png
+/res/drawable-xhdpi/commit_bj.png
+/res/drawable-xhdpi/head.png
+/res/drawable-xhdpi/newlogo.png
+/res/drawable-xxxhdpi/pwdicon.png
+/res/drawable-xxxhdpi/userdefluticon.png
+/res/drawable-xxxhdpi/commit_bj.png
+/res/drawable-xxxhdpi/newlogo.png

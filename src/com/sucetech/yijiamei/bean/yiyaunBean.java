@@ -15,4 +15,5 @@ public class yiyaunBean {
     public String contactPhone;
     public int status;
     public int orgId;
+    public boolean isSeleted;
 }

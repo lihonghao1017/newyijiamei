@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.UserMsg;
+import com.sucetech.yijiamei.bean.yiyaunBean;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.utils.TaskManager;
 
@@ -18,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -48,11 +52,11 @@ public class LoginView extends BaseView implements View.OnClickListener {
     @Override
     public void initView(Context context) {
         View v = LayoutInflater.from(context).inflate(R.layout.activity_login, null);
-        user =(EditText) v.findViewById(R.id.username);
-        pwd = (EditText)v.findViewById(R.id.pwd);
+        user = (EditText) v.findViewById(R.id.username);
+        pwd = (EditText) v.findViewById(R.id.pwd);
         commit = v.findViewById(R.id.commit);
         commit.setOnClickListener(this);
-        this.addView(v,-1,-1);
+        this.addView(v, -1, -1);
         user.setText(UserMsg.getUserName());
         pwd.setText(UserMsg.getPwd());
     }
@@ -60,7 +64,7 @@ public class LoginView extends BaseView implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.commit) {
-            ((MainActivity)getContext()).showProgressDailogView("登陆中...");
+            ((MainActivity) getContext()).showProgressDailogView("登陆中...");
             UserMsg.saveUserName(user.getText().toString());
             UserMsg.savePwd(pwd.getText().toString());
             TaskManager.getInstance().addTask(new Runnable() {
@@ -72,8 +76,10 @@ public class LoginView extends BaseView implements View.OnClickListener {
 
         }
     }
-    private String TAG="LLL";
+
+    private String TAG = "LLL";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
     private String requestLoing2() {
 
         JSONObject jsonObject = new JSONObject();
@@ -89,32 +95,30 @@ public class LoginView extends BaseView implements View.OnClickListener {
                 .post(body)
                 .build();
         try {
-            final Response response = ((MainActivity)getContext()).client.newCall(request).execute();
+            final Response response = ((MainActivity) getContext()).client.newCall(request).execute();
             if (response.isSuccessful()) {
-                Log.e("LLL","chenggong--->");
                 UserMsg.saveToken(response.header("Authorization"));
-                Log.e("LLL","Token-->"+UserMsg.getToken());
                 requestYiyuan();
-                this.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((MainActivity)getContext()).hideProgressDailogView();
-                        mEventManager.notifyObservers(EventStatus.logined,null);
-                        LoginView.this.setVisibility(View.GONE);
+//                this.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        ((MainActivity)getContext()).hideProgressDailogView();
 //                        mEventManager.notifyObservers(EventStatus.logined,null);
-                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
-                    }
-                });
+//                        LoginView.this.setVisibility(View.GONE);
+////                        mEventManager.notifyObservers(EventStatus.logined,null);
+//                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
+//                    }
+//                });
 //
                 return response.body().string();
             } else {
-                Log.e("LLL","shibai--->");
+                Log.e("LLL", "shibai--->");
 
                 this.post(new Runnable() {
                     @Override
                     public void run() {
-                        ((MainActivity)getContext()).hideProgressDailogView();
-                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
+                        ((MainActivity) getContext()).hideProgressDailogView();
+                        Toast.makeText(getContext(), "chengong -->", Toast.LENGTH_LONG);
                     }
                 });
 //                Toast.makeText(getContext(),"shibai -->"+response.message(),Toast.LENGTH_LONG);
@@ -137,32 +141,33 @@ public class LoginView extends BaseView implements View.OnClickListener {
                 .get()
                 .build();
         try {
-            final Response response = ((MainActivity)getContext()).client.newCall(request).execute();
+            final Response response = ((MainActivity) getContext()).client.newCall(request).execute();
             if (response.isSuccessful()) {
-                Log.e("LLL","chenggong--requestYiyuan->");
+                Log.e("LLL", "chenggong--requestYiyuan->");
 //                Log.e("LLL","chenggong--requestYiyuan22->"+response.body().string());
-                UserMsg.saveYiyuan(response.body().string());
-                Log.e("LLL","chenggong--requestYiyuan->"+UserMsg.getYiyuan());
+//                UserMsg.saveYiyuan(response.body().string());
+                final List<yiyaunBean> data= new Gson().fromJson(response.body().string(), new TypeToken<List<yiyaunBean>>(){}.getType());//把JSON字符串转为对象
+
+                Log.e("LLL", "chenggong--requestYiyuan->" + UserMsg.getYiyuan());
                 this.post(new Runnable() {
                     @Override
                     public void run() {
-//                        ((MainActivity)getContext()).hideProgressDailogView();
-//                        UserMsg.saveToken(response.header("Authorization"));
+                        ((MainActivity) getContext()).hideProgressDailogView();
+                        mEventManager.notifyObservers(EventStatus.hospitalData, data);
+                        LoginView.this.setVisibility(View.GONE);
 //                        mEventManager.notifyObservers(EventStatus.logined,null);
-//                        LoginView.this.setVisibility(View.GONE);
-//                        mEventManager.notifyObservers(EventStatus.logined,null);
-                        Toast.makeText(getContext(),"chengong -->",Toast.LENGTH_LONG);
+                        Toast.makeText(getContext(), "chengong -->", Toast.LENGTH_LONG);
                     }
                 });
 //
 //                return response.body().string();
             } else {
-                Log.e("LLL","shibai---requestYiyuan>");
+                Log.e("LLL", "shibai---requestYiyuan>");
 //                ((MainActivity)getContext()).hideProgressDailogView();
                 this.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getContext(),"shibai --requestYiyuan>",Toast.LENGTH_LONG);
+                        Toast.makeText(getContext(), "shibai --requestYiyuan>", Toast.LENGTH_LONG);
                     }
                 });
 //                Toast.makeText(getContext(),"shibai -->"+response.message(),Toast.LENGTH_LONG);

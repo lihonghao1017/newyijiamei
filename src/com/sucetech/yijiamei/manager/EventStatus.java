@@ -10,5 +10,6 @@ public enum EventStatus {
     weight,
     wuliaoList,
     imgMsg,
+    hospitalData,
 }
 

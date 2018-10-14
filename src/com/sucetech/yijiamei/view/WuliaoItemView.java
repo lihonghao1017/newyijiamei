@@ -117,7 +117,7 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
                 break;
             case R.id.name:
                 mSuggistPopView.setWidth(this.getWidth());
-                mSuggistPopView.showAsDropDown(((MainActivity) getContext()).mConBluthView.weidthStr, 0, 0);
+//                mSuggistPopView.showAsDropDown(((MainActivity) getContext()).mConBluthView.weidthStr, 0, 0);
                 break;
         }
     }

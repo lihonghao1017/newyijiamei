@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#49C998"
+        android:orientation="vertical">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/userMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/usermsgicon" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="回收系统"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#07923A" />
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="235dp"
+        android:orientation="vertical">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/erweimaIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/saoyisaoicon" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/erweimaIcon"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:text="点击上方按钮扫二维码"
+            android:textColor="#BABABA"
+            android:textSize="20dp" />
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/bluthIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="35dp"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/bluthicon" />
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/bluthStrLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/bluthStr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="蓝牙"
+                android:textColor="#07923A"
+                android:textSize="12dp" />
+
+            <com.mapbar.scale.ScaleImageView
+                android:id="@+id/bluthIconCursor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:src="@drawable/bluthcursor_n" />
+        </com.mapbar.scale.ScaleLinearLayout>
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/weightStr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:textColor="#07923A"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#07923A" />
+
+    <GridView
+        android:id="@+id/hospitalList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="35dp"
+        android:horizontalSpacing="32dp"
+        android:listSelector="@null"
+        android:numColumns="2"
+        android:verticalSpacing="16dp" />
+
+</com.mapbar.scale.ScaleLinearLayout>

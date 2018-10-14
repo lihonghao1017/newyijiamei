@@ -2,38 +2,47 @@
 <com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/xianxingLayout"
     android:layout_width="match_parent"
-    android:background="@drawable/login_background"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <com.sucetech.yijiamei.view.LoginView
         android:id="@+id/loginView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        />
-    <com.sucetech.yijiamei.view.ConBluthView
+        android:visibility="visible" />
+
+    <com.sucetech.yijiamei.newui.BluthHopitalView
         android:id="@+id/connectBloth"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <com.sucetech.yijiamei.view.WuLiaoCommitView
         android:id="@+id/wuliaoCommitView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/connectBloth"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
     <com.sucetech.yijiamei.view.ProgressDailogView
         android:id="@+id/progressDailogView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:visibility="gone"/>
+        android:visibility="gone" />
     <!--<com.sucetech.yijiamei.view.ToastView-->
-        <!--android:id="@+id/myToast"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center"-->
-        <!--android:visibility="gone"/>-->
+    <!--android:id="@+id/myToast"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:visibility="gone"/>-->
 
+    <com.mapbar.scale.ScaleTextView
+        android:id="@+id/locationg"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grgray"
+        android:textColor="#49C998"
+        android:textSize="33dp"
+        android:visibility="gone" />
 </com.mapbar.scale.ScaleRelativeLayout>

@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
@@ -146,7 +145,7 @@ public class WuLiaoCommitView extends BaseView implements View.OnClickListener, 
                 if (yiyuan != null && !yiyuan.equals("")) {
                     yiYuanPopView = new YiYuanPopView(getContext(), this);
                     yiYuanPopView.setWidth(this.getWidth());
-                    yiYuanPopView.showAsDropDown(((MainActivity) getContext()).mConBluthView.weidthStr, 0, 0);
+//                    yiYuanPopView.showAsDropDown(((MainActivity) getContext()).mConBluthView.weidthStr, 0, 0);
                     return;
                 }
                 Toast.makeText(getContext(), "医院数据异常", Toast.LENGTH_LONG).show();

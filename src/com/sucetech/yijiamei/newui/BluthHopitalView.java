@@ -1,4 +1,4 @@
-package com.sucetech.yijiamei.view;
+package com.sucetech.yijiamei.newui;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -10,51 +10,76 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
-import com.sucetech.yijiamei.UserMsg;
+import com.sucetech.yijiamei.adapter.HospitalAdapter;
+import com.sucetech.yijiamei.bean.yiyaunBean;
 import com.sucetech.yijiamei.manager.EventStatus;
+import com.sucetech.yijiamei.view.BaseView;
+import com.sucetech.yijiamei.view.Bluetooth_Scale;
+import com.sucetech.yijiamei.view.ConBluthView;
 import com.zxing.activity.CaptureActivity;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by lihh on 2018/9/18.
+ * Created by admin on 2018/10/13.
  */
 
-public class ConBluthView extends BaseView implements View.OnClickListener, BluthPopView.OnSelectedBluthClick {
+public class BluthHopitalView extends BaseView implements View.OnClickListener,AdapterView.OnItemClickListener{
+    private View userMsg,erweimaIcon,bluthIcon;
+    private GridView hospitalList;
+    private HospitalAdapter hospitalAdapter;
+    private List<yiyaunBean> yiyuanData;
+    private TextView weightStr;
+
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice device;
     private Bluetooth_Scale mBl_Scale;
     private Handler mHandler;
-    private SCALENOW scalenow = new SCALENOW();
-    private Boolean b_scaleIsConnect = Boolean.FALSE;
-    private Boolean bisClosed = false;
-    public TextView weidthStr;
-    private View speedLayout;
-    private View selectBluth;
-    private BluthPopView bluthPopView;
+    private ConBluthView.SCALENOW scalenow = new ConBluthView.SCALENOW();
 
-    public ConBluthView(Context context, AttributeSet attrs) {
+    public BluthHopitalView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public ConBluthView(Context context) {
-        super(context);
+    @Override
+    public void updata(EventStatus status, Object obj) {
+        switch (status){
+            case hospitalData:
+                if (obj!=null){
+                    this.setVisibility(View.VISIBLE);
+                    yiyuanData.addAll ((List<yiyaunBean>) obj);
+                    hospitalAdapter.notifyDataSetChanged();
+                }
+
+                break;
+        }
+
     }
 
     @Override
     public void initView(Context context) {
-        View v = LayoutInflater.from(context).inflate(R.layout.connect_bluth_layout, null);
-        weidthStr = (TextView) v.findViewById(R.id.weidthStr);
-        speedLayout = v.findViewById(R.id.speedLayout);
-        speedLayout.setOnClickListener(this);
-        selectBluth = v.findViewById(R.id.selectBluth);
-        selectBluth.setOnClickListener(this);
-        addView(v, -1, -1);
+        View v= LayoutInflater.from(context).inflate(R.layout.bluthhospital_layout,null);
+        userMsg=v.findViewById(R.id.userMsg);
+        erweimaIcon=v.findViewById(R.id.erweimaIcon);
+        bluthIcon=v.findViewById(R.id.bluthIcon);
+        userMsg.setOnClickListener(this);
+        erweimaIcon.setOnClickListener(this);
+        bluthIcon.setOnClickListener(this);
+        hospitalList=v.findViewById(R.id.hospitalList);
+        hospitalList.setOnItemClickListener(this);
+        yiyuanData=new ArrayList<>();
+        hospitalAdapter=new HospitalAdapter(getContext(),yiyuanData);
+        hospitalList.setAdapter(hospitalAdapter);
+        this.addView(v);
+        weightStr=v.findViewById(R.id.weightStr);
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -63,7 +88,7 @@ public class ConBluthView extends BaseView implements View.OnClickListener, Blut
                         Bundle bundle = msg.getData();
                         GetWeight(bundle.getByteArray("weight"));
                         if (scalenow.bOverFlag) {
-                            weidthStr.setText("----");
+                            weightStr.setText("----");
                         } else {
                             String wei = scalenow.sformatNetWeight.trim();
                             if(wei.contains("+")){
@@ -71,23 +96,21 @@ public class ConBluthView extends BaseView implements View.OnClickListener, Blut
                             }
                             wei = wei.trim();
 
-                            weidthStr.setText(wei);
+                            weightStr.setText(wei);
                             mEventManager.notifyObservers(EventStatus.weight, wei);
                         }
-                        speedLayout.setBackgroundResource(R.drawable.nav_ic_speed_limit);
-                        speedLayout.setEnabled(false);
-                        selectBluth.setVisibility(View.GONE);
+                        weightStr.setVisibility(View.VISIBLE);
                         break;
                     case 2:
                         ((MainActivity) getContext()).hideProgressDailogView();
                         Toast.makeText(getContext(), "蓝牙链接失败", Toast.LENGTH_SHORT).show();
-                        selectBluth.setVisibility(View.VISIBLE);
-                        if (msg.arg1 < 2) {
-                            weidthStr.setText("----");
-                            b_scaleIsConnect = Boolean.FALSE;
-                            speedLayout.setEnabled(true);
-                            speedLayout.setBackgroundResource(R.drawable.nav_ic_speed_limit_g);
-                        } else b_scaleIsConnect = Boolean.TRUE;
+                        weightStr.setVisibility(View.GONE);
+//                        if (msg.arg1 < 2) {
+//                            weidthStr.setText("----");
+//                            b_scaleIsConnect = Boolean.FALSE;
+//                            speedLayout.setEnabled(true);
+//                            speedLayout.setBackgroundResource(R.drawable.nav_ic_speed_limit_g);
+//                        } else b_scaleIsConnect = Boolean.TRUE;
                         break;
                     case 3:
                         connectBluth((String) msg.obj);
@@ -97,6 +120,30 @@ public class ConBluthView extends BaseView implements View.OnClickListener, Blut
             }
         };
         mBl_Scale = new Bluetooth_Scale(getContext(), mHandler);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.erweimaIcon:
+                Intent openCameraIntent = new Intent(getContext(), CaptureActivity.class);
+                ((MainActivity) getContext()).startActivityForResult(openCameraIntent, R.id.speedLayout);
+                break;
+
+        }
+
+    }
+    public void onDestroy(){
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        for (yiyaunBean bean:yiyuanData){
+            bean.isSeleted=false;
+        }
+        yiyuanData.get(i).isSeleted=true;
+        hospitalAdapter.notifyDataSetChanged();
     }
 
     public void startBlouth(String blouth) {
@@ -138,51 +185,6 @@ public class ConBluthView extends BaseView implements View.OnClickListener, Blut
             mHandler.sendMessageDelayed(message, 1000);
         }
     }
-
-
-    @Override
-    public void updata(EventStatus status, Object obj) {
-        switch (status) {
-            case logined:
-                this.setVisibility(View.VISIBLE);
-                if (UserMsg.getMac() != null && !UserMsg.getMac().equals("")) {
-                    startBlouth(UserMsg.getMac());
-                } else {
-                    selectBluth.setVisibility(View.VISIBLE);
-                }
-                break;
-            case loginFail:
-                break;
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.speedLayout:
-                Intent openCameraIntent = new Intent(getContext(), CaptureActivity.class);
-                ((MainActivity) getContext()).startActivityForResult(openCameraIntent, R.id.speedLayout);
-                break;
-            case R.id.selectBluth:
-                Set<BluetoothDevice> devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
-                if (devices.size() > 0) {
-                    bluthPopView = new BluthPopView(getContext(), this);
-                    bluthPopView.setWidth(this.getWidth());
-                    bluthPopView.showAsDropDown(this, 0, 0);
-
-                } else {
-                    Toast.makeText(getContext(), "请先手动配对", Toast.LENGTH_LONG).show();
-                }
-                break;
-        }
-    }
-
-    public void onDestroy() {
-        if (mBl_Scale != null) mBl_Scale.stop();
-        bisClosed = true;
-        System.exit(0);
-    }
-
     void GetWeight(byte[] databuf) {
         int i, j, offset = 6;
         boolean StartFalg = false;
@@ -227,11 +229,11 @@ public class ConBluthView extends BaseView implements View.OnClickListener, Blut
         scalenow.sUnit = new String(databuf, i + offset, j);
     }
 
-    @Override
-    public void OnBluthItemClick(String mac) {
-        startBlouth(mac);
-        bluthPopView.dismiss();
-    }
+//    @Override
+//    public void OnBluthItemClick(String mac) {
+//        startBlouth(mac);
+////        bluthPopView.dismiss();
+//    }
 
     public static class SCALENOW {
         public String sformatNetWeight = "0";
