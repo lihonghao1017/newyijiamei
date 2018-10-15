@@ -8,15 +8,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
+import com.sucetech.yijiamei.adapter.BluthAdapter;
 import com.sucetech.yijiamei.adapter.HospitalAdapter;
 import com.sucetech.yijiamei.bean.yiyaunBean;
 import com.sucetech.yijiamei.manager.EventStatus;
@@ -27,6 +30,7 @@ import com.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by admin on 2018/10/13.
@@ -44,6 +48,8 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
     private Bluetooth_Scale mBl_Scale;
     private Handler mHandler;
     private ConBluthView.SCALENOW scalenow = new ConBluthView.SCALENOW();
+    private ListView boluthList;
+    private List<BluetoothDevice> deviceList;
 
     public BluthHopitalView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -69,7 +75,7 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
         View v= LayoutInflater.from(context).inflate(R.layout.bluthhospital_layout,null);
         userMsg=v.findViewById(R.id.userMsg);
         erweimaIcon=v.findViewById(R.id.erweimaIcon);
-        bluthIcon=v.findViewById(R.id.bluthIcon);
+        bluthIcon=v.findViewById(R.id.bluthLayout);
         userMsg.setOnClickListener(this);
         erweimaIcon.setOnClickListener(this);
         bluthIcon.setOnClickListener(this);
@@ -80,6 +86,8 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
         hospitalList.setAdapter(hospitalAdapter);
         this.addView(v);
         weightStr=v.findViewById(R.id.weightStr);
+        boluthList=v.findViewById(R.id.boluthList);
+        boluthList.setOnItemClickListener(this);
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
@@ -120,6 +128,17 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
             }
         };
         mBl_Scale = new Bluetooth_Scale(getContext(), mHandler);
+        initBluth();
+    }
+    private void initBluth(){
+        Set<BluetoothDevice> devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
+        if (devices.size() > 0) {
+            deviceList = new ArrayList<>();
+            for (BluetoothDevice device : devices) {
+                deviceList.add(device);
+            }
+            boluthList.setAdapter(new BluthAdapter(getContext(),deviceList));
+        }
     }
 
     @Override
@@ -128,6 +147,15 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
             case R.id.erweimaIcon:
                 Intent openCameraIntent = new Intent(getContext(), CaptureActivity.class);
                 ((MainActivity) getContext()).startActivityForResult(openCameraIntent, R.id.speedLayout);
+                break;
+            case R.id.bluthLayout:
+                bluthIcon.setSelected(!bluthIcon.isSelected());
+                if (bluthIcon.isSelected()){
+                    boluthList.setVisibility(View.VISIBLE);
+                }else{
+                    boluthList.setVisibility(View.GONE);
+                }
+
                 break;
 
         }
@@ -139,11 +167,17 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        for (yiyaunBean bean:yiyuanData){
-            bean.isSeleted=false;
+        if(view.getId()==R.id.boluthList){
+           String mac= deviceList.get(i).getAddress();
+           startBlouth(mac);
+        }else{
+            for (yiyaunBean bean:yiyuanData){
+                bean.isSeleted=false;
+            }
+            yiyuanData.get(i).isSeleted=true;
+            hospitalAdapter.notifyDataSetChanged();
         }
-        yiyuanData.get(i).isSeleted=true;
-        hospitalAdapter.notifyDataSetChanged();
+
     }
 
     public void startBlouth(String blouth) {
