@@ -57,19 +57,8 @@
             android:textColor="#BABABA"
             android:textSize="20dp" />
 
-        <com.mapbar.scale.ScaleImageView
-            android:id="@+id/bluthIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="35dp"
-            android:layout_marginRight="30dp"
-            android:src="@drawable/bluthicon" />
-
         <com.mapbar.scale.ScaleLinearLayout
-            android:id="@+id/bluthStrLayout"
+            android:id="@+id/bluthLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -77,22 +66,38 @@
             android:layout_marginBottom="16dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <com.mapbar.scale.ScaleTextView
-                android:id="@+id/bluthStr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="蓝牙"
-                android:textColor="#07923A"
-                android:textSize="12dp" />
+            android:orientation="vertical">
 
             <com.mapbar.scale.ScaleImageView
-                android:id="@+id/bluthIconCursor"
+                android:id="@+id/bluthIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:src="@drawable/bluthcursor_n" />
+                android:src="@drawable/bluthicon" />
+
+            <com.mapbar.scale.ScaleLinearLayout
+                android:id="@+id/bluthStrLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.mapbar.scale.ScaleTextView
+                    android:id="@+id/bluthStr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="蓝牙"
+                    android:textColor="#07923A"
+                    android:textSize="12dp" />
+
+                <com.mapbar.scale.ScaleImageView
+                    android:id="@+id/bluthIconCursor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:src="@drawable/bluthcursor_n" />
+            </com.mapbar.scale.ScaleLinearLayout>
         </com.mapbar.scale.ScaleLinearLayout>
 
         <com.mapbar.scale.ScaleTextView
@@ -112,16 +117,32 @@
         android:layout_height="1dp"
         android:background="#07923A" />
 
-    <GridView
-        android:id="@+id/hospitalList"
+    <com.mapbar.scale.ScaleRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="35dp"
-        android:horizontalSpacing="32dp"
-        android:listSelector="@null"
-        android:numColumns="2"
-        android:verticalSpacing="16dp" />
+        android:layout_marginTop="35dp">
+
+        <GridView
+            android:id="@+id/hospitalList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:horizontalSpacing="32dp"
+            android:listSelector="@null"
+            android:numColumns="2"
+            android:verticalSpacing="16dp" />
+
+        <ListView
+            android:id="@+id/boluthList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#07923A"
+            android:dividerHeight="1dp"
+            android:background="@android:color/white"
+            android:listSelector="@null"
+            android:visibility="gone" />
+    </com.mapbar.scale.ScaleRelativeLayout>
+
 
 </com.mapbar.scale.ScaleLinearLayout>
