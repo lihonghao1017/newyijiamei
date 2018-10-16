@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <color name="CCFFFFFF">#CCFFFFFF</color>
+  <color name="baseColor">#07923A</color>
   <color name="MFFFFFF">#FFF</color>
   <color name="bg_color">#EDEDED</color>
   <color name="contents_text">#ff000000</color>

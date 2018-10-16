@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.mapbar.scale.ScaleTextView
+        android:id="@+id/nextAction"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/baseColor"
+        android:gravity="center"
+        android:text="下一步"
+        android:textColor="@android:color/white"
+        android:textSize="24dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/nextCommand">
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/wuliaoContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
+    </ScrollView>
+
+
+</com.mapbar.scale.ScaleRelativeLayout>

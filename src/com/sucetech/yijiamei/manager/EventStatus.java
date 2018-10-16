@@ -11,5 +11,6 @@ public enum EventStatus {
     wuliaoList,
     imgMsg,
     hospitalData,
+    selectedHos,
 }
 

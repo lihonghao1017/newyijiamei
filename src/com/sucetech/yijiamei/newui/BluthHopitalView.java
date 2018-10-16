@@ -108,11 +108,13 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
                             mEventManager.notifyObservers(EventStatus.weight, wei);
                         }
                         weightStr.setVisibility(View.VISIBLE);
+                        boluthList.setVisibility(View.GONE);
                         break;
                     case 2:
                         ((MainActivity) getContext()).hideProgressDailogView();
                         Toast.makeText(getContext(), "蓝牙链接失败", Toast.LENGTH_SHORT).show();
                         weightStr.setVisibility(View.GONE);
+                        boluthList.setVisibility(View.VISIBLE);
 //                        if (msg.arg1 < 2) {
 //                            weidthStr.setText("----");
 //                            b_scaleIsConnect = Boolean.FALSE;
@@ -167,7 +169,7 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        if(view.getId()==R.id.boluthList){
+        if(adapterView.getId()==R.id.boluthList){
            String mac= deviceList.get(i).getAddress();
            startBlouth(mac);
         }else{
