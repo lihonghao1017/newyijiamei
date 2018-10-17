@@ -160,7 +160,7 @@ android:layout_marginRight="10dp"
                 android:layout_toRightOf="@id/beishuStr"
                 android:layout_marginLeft="30dp"
                 android:background="@null"
-                android:text="11"
+                android:text="1"
                 android:textColor="#424242"
                 android:textSize="22dp" />
             <com.mapbar.scale.ScaleTextView

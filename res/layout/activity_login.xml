@@ -11,10 +11,10 @@
         android:background="#49C998"
         android:gravity="center">
 
-        <com.mapbar.scale.ScaleImageView
+      <!--  <com.mapbar.scale.ScaleImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/newlogo" />
+            android:src="@drawable/newlogo" />-->
     </com.mapbar.scale.ScaleLinearLayout>
 
     <com.mapbar.scale.ScaleRelativeLayout
@@ -29,8 +29,7 @@
         <com.mapbar.scale.ScaleImageView
             android:id="@+id/usernameIcon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/userdefluticon" />
+            android:layout_height="wrap_content"/>
 
         <com.mapbar.scale.ScaleEditText
             android:id="@+id/username"
@@ -40,7 +39,6 @@
             android:layout_toRightOf="@id/usernameIcon"
             android:background="@android:color/transparent"
             android:hint="请输入用户名"
-            android:src="@drawable/userdefluticon"
             android:textColor="@android:color/black"
             android:textSize="23dp" />
 
@@ -67,8 +65,7 @@
         <com.mapbar.scale.ScaleImageView
             android:id="@+id/pwdIcon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/userdefluticon" />
+            android:layout_height="wrap_content" />
 
         <com.mapbar.scale.ScaleEditText
             android:id="@+id/pwd"
@@ -78,7 +75,6 @@
             android:layout_toRightOf="@id/pwdIcon"
             android:background="@android:color/transparent"
             android:hint="密码"
-            android:src="@drawable/userdefluticon"
             android:textColor="@android:color/black"
             android:textSize="23dp" />
 
@@ -100,7 +96,6 @@
         android:layout_below="@id/pwdLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:background="@drawable/commit_bj"
         android:gravity="center"
         android:text="登陆"
         android:textColor="#ffffff"
