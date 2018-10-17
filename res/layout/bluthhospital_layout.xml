@@ -7,21 +7,20 @@
     <com.mapbar.scale.ScaleRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="#49C998"
+        android:background="@color/baseColor"
         android:orientation="vertical">
 
         <com.mapbar.scale.ScaleImageView
             android:id="@+id/userMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:src="@drawable/usermsgicon" />
 
         <com.mapbar.scale.ScaleTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:text="回收系统"
             android:textColor="@android:color/white"
             android:textSize="24dp" />

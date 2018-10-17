@@ -47,11 +47,11 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
     public void initView(Context context) {
         View v = LayoutInflater.from(context).inflate(R.layout.materiel_item_layout, null);
         this.addView(v, -1, -1);
-        delete = (TextView) v.findViewById(R.id.delete);
-        updata = (TextView) v.findViewById(R.id.updata);
-        weidth = (TextView) v.findViewById(R.id.weidth);
-        type = (TextView) v.findViewById(R.id.type);
-        price = (TextView) v.findViewById(R.id.price);
+        delete = v.findViewById(R.id.delete);
+        updata = v.findViewById(R.id.updata);
+        weidth =  v.findViewById(R.id.weidth);
+        type =  v.findViewById(R.id.type);
+        price = v.findViewById(R.id.price);
         delete.setOnClickListener(this);
         updata.setOnClickListener(this);
         type.setOnClickListener(this);

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.bean.RecycleMaterialDetails;
+import com.sucetech.yijiamei.bean.yiyaunBean;
 import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.view.BaseView;
@@ -24,6 +25,8 @@ import java.util.List;
 public class AddMaterielView extends BaseView implements View.OnClickListener {
     private TextView nextAction;
     private LinearLayout wuliaoContent;
+    private TextView title;
+    private yiyaunBean yiyaunBean;
 
     public AddMaterielView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -32,9 +35,12 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
     @Override
     public void updata(EventStatus status, Object obj) {
         if (status == EventStatus.selectedHos) {
+            wuliaoContent.removeAllViews();
             wuliaoContent.addView(new MaterielItemView(getContext(), wuliaoContent));
+            yiyaunBean = (com.sucetech.yijiamei.bean.yiyaunBean) obj;
+            title.setText(yiyaunBean.name);
+            this.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
@@ -43,6 +49,9 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
         nextAction = v.findViewById(R.id.nextAction);
         nextAction.setOnClickListener(this);
         wuliaoContent = v.findViewById(R.id.wuliaoContent);
+        title = v.findViewById(R.id.title);
+        v.findViewById(R.id.back).setOnClickListener(this);
+        this.addView(v,-1,-1);
     }
 
     @Override
@@ -53,15 +62,22 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
             for (int i = 0; i < count; i++) {
                 MaterielItemView itemView = (MaterielItemView) wuliaoContent.getChildAt(i);
                 RecycleMaterialDetails item = itemView.getRecycleMaterialDetails();
-                if (item == null && i != count - 1) {
+                if (item != null ) {
                     datas.add(item);
-                    Toast.makeText(getContext(), "请检测第" + count + "个物料信息", Toast.LENGTH_LONG).show();
-                    return;
+
+                }else{
+                    if( i != count - 1){
+                        Toast.makeText(getContext(), "请检测第" + count + "个物料信息", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                 }
             }
-            if (datas.size()>0) {
-                EventManager.getEventManager().notifyObservers(EventStatus.materirList,datas);
+            if (datas.size() > 0) {
+                EventManager.getEventManager().notifyObservers(EventStatus.materirList, datas);
             }
+
+        } else if (view.getId() == R.id.back) {
+            this.setVisibility(View.GONE);
 
         }
 

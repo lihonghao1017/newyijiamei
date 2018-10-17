@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
          //添加Flag把状态栏设为可绘制模式
          window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
          //设置状态栏颜色
-         window.setStatusBarColor(R.color.baseColor);
+         window.setStatusBarColor(0xff07923A);
     }
     @Override
     protected void onStart() {

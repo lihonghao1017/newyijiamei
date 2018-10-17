@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/baseColor"
+        android:orientation="vertical">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="回收系统"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+    </com.mapbar.scale.ScaleRelativeLayout>
 
     <com.mapbar.scale.ScaleTextView
         android:id="@+id/nextAction"
@@ -17,7 +42,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/nextCommand">
+        android:layout_below="@id/titleLayout"
+        android:layout_above="@id/nextAction">
         <com.mapbar.scale.ScaleLinearLayout
             android:id="@+id/wuliaoContent"
             android:layout_width="match_parent"

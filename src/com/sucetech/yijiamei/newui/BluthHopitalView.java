@@ -22,6 +22,7 @@ import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.adapter.BluthAdapter;
 import com.sucetech.yijiamei.adapter.HospitalAdapter;
 import com.sucetech.yijiamei.bean.yiyaunBean;
+import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.view.BaseView;
 import com.sucetech.yijiamei.view.Bluetooth_Scale;
@@ -178,6 +179,8 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
             }
             yiyuanData.get(i).isSeleted=true;
             hospitalAdapter.notifyDataSetChanged();
+            EventManager.getEventManager().notifyObservers(EventStatus.selectedHos,yiyuanData.get(i));
+
         }
 
     }
