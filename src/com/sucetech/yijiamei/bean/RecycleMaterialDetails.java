@@ -18,6 +18,7 @@ public class RecycleMaterialDetails {
      */
     public int type;
 
+    public String typeName;
     /**
      * 重量
      */

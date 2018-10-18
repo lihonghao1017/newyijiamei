@@ -51,7 +51,7 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
         wuliaoContent = v.findViewById(R.id.wuliaoContent);
         title = v.findViewById(R.id.title);
         v.findViewById(R.id.back).setOnClickListener(this);
-        this.addView(v,-1,-1);
+        this.addView(v, -1, -1);
     }
 
     @Override
@@ -59,17 +59,14 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
         if (view.getId() == R.id.nextAction) {
             int count = wuliaoContent.getChildCount();
             List<RecycleMaterialDetails> datas = new ArrayList<>();
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count - 1; i++) {
                 MaterielItemView itemView = (MaterielItemView) wuliaoContent.getChildAt(i);
                 RecycleMaterialDetails item = itemView.getRecycleMaterialDetails();
-                if (item != null ) {
+                if (item != null) {
                     datas.add(item);
-
-                }else{
-                    if( i != count - 1){
-                        Toast.makeText(getContext(), "请检测第" + count + "个物料信息", Toast.LENGTH_LONG).show();
-                        return;
-                    }
+                } else {
+                    Toast.makeText(getContext(), "请检测第" + count + "个物料信息", Toast.LENGTH_LONG).show();
+                    return;
                 }
             }
             if (datas.size() > 0) {

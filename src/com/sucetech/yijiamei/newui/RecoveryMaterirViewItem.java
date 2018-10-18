@@ -36,7 +36,7 @@ public class RecoveryMaterirViewItem extends BaseView implements View.OnClickLis
         if (status == EventStatus.materirItem) {
             RecycleMaterialDetails item = (RecycleMaterialDetails) obj;
             weidth.setText(item.weight + "");
-            type.setText(item.type + "");
+            type.setText(item.typeName + "");
             price.setText(item.price + "");
             beishu.setText(item.multiple + "");
         }
@@ -58,8 +58,12 @@ public class RecoveryMaterirViewItem extends BaseView implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.edit:
-                ((RecoveryMaterirView)prentView).eidt();
+                recoveryMaterirView.eidt();
                 break;
         }
+    }
+    private RecoveryMaterirView recoveryMaterirView;
+    public void setRecoveryMaterirView(RecoveryMaterirView recoveryMaterirView) {
+        this.recoveryMaterirView = recoveryMaterirView;
     }
 }

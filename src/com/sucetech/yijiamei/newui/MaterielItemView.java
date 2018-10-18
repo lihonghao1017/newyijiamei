@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MaterielItemView extends BaseView implements View.OnClickListener, SuggistPopView.OnSuggistItemClick {
     private View delete, updata;
-    private TextView weidth, type, price;
+    private TextView weidth, type, price,beishu;
     private String weight;
     private SuggistPopView mSuggistPopView;
     private List<WuLiaoBean> datas;
@@ -50,6 +50,7 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
         delete = v.findViewById(R.id.delete);
         updata = v.findViewById(R.id.updata);
         weidth =  v.findViewById(R.id.weidth);
+        beishu=v.findViewById(R.id.beishu);
         type =  v.findViewById(R.id.type);
         price = v.findViewById(R.id.price);
         delete.setOnClickListener(this);
@@ -98,6 +99,7 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
     @Override
     public void onSuggistItemClick(int position, String str) {
         type.setText(str);
+        recycleMaterialDetails.typeName=str;
         recycleMaterialDetails.type = position;
         mSuggistPopView.dismiss();
         if (!isCreatNextItem && !weidth.getText().toString().equals("") && weidth.getText().toString() != null) {
@@ -113,6 +115,23 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
         if ( type.getText().toString() == null||type.getText().toString().equals("")){
             Toast.makeText(getContext(),"请选择类型",Toast.LENGTH_LONG).show();
             return null;
+        }
+
+        float www = Float.valueOf(0);
+        if (beishu.getText().toString() != null && !beishu.getText().toString().equals("")) {
+           if (weidth.getText().toString().contains("-")){
+               www=0;
+           }else{
+               www = Float.parseFloat(weidth.getText().toString()) * Float.parseFloat(beishu.getText().toString());
+               recycleMaterialDetails.multiple= Float.parseFloat(beishu.getText().toString());
+           }
+        } else {
+            www = Float.parseFloat(weidth.getText().toString());
+            recycleMaterialDetails.multiple=1;
+        }
+        recycleMaterialDetails.weight=www;
+        if (price.getText().toString() != null && !price.getText().toString().equals("")) {
+            recycleMaterialDetails.price=price.getText().toString();
         }
         return recycleMaterialDetails;
     }

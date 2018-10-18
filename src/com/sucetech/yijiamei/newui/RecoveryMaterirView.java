@@ -36,11 +36,12 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
         if (status == EventStatus.materirList) {
             datas.clear();
             datas.addAll((Collection<? extends RecycleMaterialDetails>) obj);
-            removeAllViews();
+            wuliaoContent.removeAllViews();
             this.setVisibility(View.VISIBLE);
             for (int i = 0; i < datas.size(); i++) {
                 RecoveryMaterirViewItem item = new RecoveryMaterirViewItem(getContext(), wuliaoContent);
                 item.updata(EventStatus.materirItem, datas.get(i));
+                item.setRecoveryMaterirView(this);
                 wuliaoContent.addView(item);
             }
         }
@@ -55,7 +56,7 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
         v.findViewById(R.id.back).setOnClickListener(this);
         v.findViewById(R.id.nohegeLayout).setOnClickListener(this);
         wuliaoContent = v.findViewById(R.id.wuliaoContent);
-        noOKLayout=v.findViewById(R.id.noOKLayout);
+        noOKLayout = v.findViewById(R.id.noOKLayout);
         this.addView(v);
     }
 
@@ -67,13 +68,15 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
         } else if (v.getId() == R.id.back) {
             eidt();
         } else if (v.getId() == R.id.nohegeLayout) {
-            noOKLayout.addView(new NoOkMaterirView(getContext(),noOKLayout));
+            noOKLayout.setVisibility(View.VISIBLE);
+            noOKLayout.removeAllViews();
+            noOKLayout.addView(new NoOkMaterirView(getContext(), noOKLayout));
         }
     }
 
     public void eidt() {
         this.setVisibility(View.GONE);
-        this.removeAllViews();
+        wuliaoContent.removeAllViews();
         datas.clear();
     }
 }
