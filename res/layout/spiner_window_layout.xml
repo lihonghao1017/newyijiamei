@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0.9"
-    android:background="#000000"
     android:orientation="vertical">
 
-   <!-- <View
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/con"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />-->
+        android:layout_height="320dp"
+        android:background="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-    <com.mapbar.scale.ScaleListView
-        android:id="@+id/listview"
+        <com.mapbar.scale.ScaleGridView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="60dp"
+            android:cacheColorHint="#00000000"
+            android:horizontalSpacing="30dp"
+            android:listSelector="@drawable/feedback_select"
+            android:numColumns="3"
+            android:scrollbarSize="10dp"
+            android:scrollbars="vertical"
+            android:verticalSpacing="20dp" />
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/delete" />
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@android:color/black"
-        android:cacheColorHint="#00000000"
-        android:divider="#2D2D2E"
-        android:dividerHeight="2dp"
-        android:listSelector="@drawable/feedback_select"
-        android:scrollbarSize="10dp"
-        android:scrollbars="vertical" />
-</com.mapbar.scale.ScaleLinearLayout>
+        android:layout_above="@id/con"
+        android:alpha="0.6"
+        android:background="#000000" />
+
+
+</com.mapbar.scale.ScaleRelativeLayout>

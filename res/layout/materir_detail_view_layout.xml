@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/baseColor"
+        android:orientation="vertical">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="回收概况"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/nohegeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/noHegeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="不合格物料"
+                android:textColor="@android:color/white"
+                android:textSize="14dp" />
+
+            <com.mapbar.scale.ScaleImageView
+                android:id="@+id/noHegeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/nohegei_addcon" />
+        </com.mapbar.scale.ScaleLinearLayout>
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <com.mapbar.scale.ScaleTextView
+        android:id="@+id/nextAction"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/baseColor"
+        android:gravity="center"
+        android:text="下一步"
+        android:textColor="@android:color/white"
+        android:textSize="24dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/nextAction"
+        android:layout_below="@id/titleLayout">
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/wuliaoContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/noOKLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</com.mapbar.scale.ScaleRelativeLayout>

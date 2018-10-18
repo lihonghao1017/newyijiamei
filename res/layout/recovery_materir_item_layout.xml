@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal">
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/typeStr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="类型"
+            android:textColor="#ABABAB"
+            android:textSize="22dp" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/typeStr"
+            android:text="玻璃"
+            android:textColor="#424242"
+            android:textSize="22dp" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/priceStr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_below="@id/typeStr"
+            android:text="价格"
+            android:textColor="#ABABAB"
+            android:textSize="22dp" />
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/typeStr"
+            android:layout_below="@id/typeStr"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="6dp"
+            android:text="10"
+            android:textColor="#C30000"
+            android:textSize="22dp" />
+    </com.mapbar.scale.ScaleRelativeLayout>
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/weidthStr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="重量"
+            android:textColor="#ABABAB"
+            android:textSize="22dp" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/weidth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/weidthStr"
+            android:textColor="#424242"
+            android:textSize="22dp" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/beishuStr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_below="@id/weidthStr"
+            android:text="倍数"
+            android:textColor="#ABABAB"
+            android:textSize="22dp" />
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/beishu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/weidthStr"
+            android:layout_below="@id/weidthStr"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="6dp"
+            android:text="10"
+            android:textColor="#C30000"
+            android:textSize="22dp" />
+    </com.mapbar.scale.ScaleRelativeLayout>
+    <com.mapbar.scale.ScaleImageView
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/edit" />
+    <com.mapbar.scale.ScaleTextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/beishuiPriceLayout"
+        android:layout_marginTop="30dp"
+        android:background="@color/baseColor" />
+
+</com.mapbar.scale.ScaleLinearLayout>

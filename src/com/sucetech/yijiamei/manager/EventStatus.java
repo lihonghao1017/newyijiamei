@@ -12,6 +12,7 @@ public enum EventStatus {
     imgMsg,
     hospitalData,
     selectedHos,
-    materirList;
+    materirList,
+    materirItem,
 }
 

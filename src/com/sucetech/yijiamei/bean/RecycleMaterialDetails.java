@@ -33,5 +33,6 @@ public class RecycleMaterialDetails {
      * 流程Id可以不传
      */
     public Byte flowType;
+    public float multiple;
 
 }

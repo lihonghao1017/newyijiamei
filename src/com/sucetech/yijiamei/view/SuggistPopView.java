@@ -23,7 +23,7 @@ import java.util.List;
 
 public class SuggistPopView extends PopupWindow {
     private LayoutInflater inflater;
-    private ListView mListView;
+    private GridView mListView;
     private List<WuLiaoBean> list;
     private MyAdapter mAdapter;
     private OnSuggistItemClick clickListener;
@@ -47,8 +47,14 @@ public class SuggistPopView extends PopupWindow {
         setFocusable(true);
         ColorDrawable dw = new ColorDrawable(0x00);
         setBackgroundDrawable(dw);
-        mListView = (ListView) view.findViewById(R.id.listview);
+        mListView = (GridView) view.findViewById(R.id.listview);
         mListView.setAdapter(mAdapter = new MyAdapter());
+        view.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
 
 
