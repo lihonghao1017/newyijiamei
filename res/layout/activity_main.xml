@@ -29,14 +29,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
-
-
-
-    <com.sucetech.yijiamei.view.WuLiaoCommitView
-        android:id="@+id/wuliaoCommitView"
+    <com.sucetech.yijiamei.newui.CommitView
+        android:id="@+id/commitView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
+
+
+
+
+    <!--<com.sucetech.yijiamei.view.WuLiaoCommitView
+        android:id="@+id/wuliaoCommitView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />-->
 
     <com.sucetech.yijiamei.view.ProgressDailogView
         android:id="@+id/progressDailogView"

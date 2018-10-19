@@ -162,8 +162,8 @@
 
                 <com.mapbar.scale.ScaleImageView
                     android:id="@+id/img02"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <com.mapbar.scale.ScaleImageView
                     android:id="@+id/img02delete"
@@ -184,8 +184,8 @@
 
                 <com.mapbar.scale.ScaleImageView
                     android:id="@+id/img03"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <com.mapbar.scale.ScaleImageView
                     android:id="@+id/img03delete"

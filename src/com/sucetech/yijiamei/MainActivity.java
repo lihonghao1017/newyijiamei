@@ -6,14 +6,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.format.Time;
 import android.util.Log;
@@ -22,21 +19,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.Poi;
-
 import com.sucetech.yijiamei.bean.FormImage;
 import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.newui.BluthHopitalView;
 import com.sucetech.yijiamei.utils.BitmapUtils;
 import com.sucetech.yijiamei.utils.PhotoUtils;
-import com.sucetech.yijiamei.view.ConBluthView;
 import com.sucetech.yijiamei.view.ProgressDailogView;
-import com.sucetech.yijiamei.view.ToastView;
 
 import java.io.File;
 import java.io.IOException;

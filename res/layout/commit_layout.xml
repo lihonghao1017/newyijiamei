@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/baseColor"
+        android:orientation="vertical">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="收据信息"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/inputnubmerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/titleLayout"
+        android:layout_margin="20dp">
+
+        <com.mapbar.scale.ScaleEditText
+            android:id="@+id/inputET"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:hint="请输入单据号"
+            android:background="@android:color/transparent"
+            android:textColor="#B5B5B5"
+            android:textSize="22dp" />
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/delete" />
+
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+
+    <com.mapbar.scale.ScaleTextView
+        android:id="@+id/nextAction"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/baseColor"
+        android:gravity="center"
+        android:text="提交"
+        android:textColor="@android:color/white"
+        android:textSize="24dp" />
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:id="@+id/wuliaoContent"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@id/inputnubmerLayout"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp">
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/saoyisaoLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.mapbar.scale.ScaleImageView
+                android:id="@+id/saoyisao"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/saoyisaoicon" />
+
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/saoyisaoStr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="扫描单据号"
+                android:textColor="@color/baseColor"
+                android:textSize="22dp" />
+
+        </com.mapbar.scale.ScaleLinearLayout>
+
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/shoujupaizhaoLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.mapbar.scale.ScaleImageView
+                android:id="@+id/paizhao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/paizhaoicon" />
+
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/paizhaoStr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="拍照"
+                android:textColor="@color/baseColor"
+                android:textSize="22dp" />
+
+        </com.mapbar.scale.ScaleLinearLayout>
+
+
+    </com.mapbar.scale.ScaleLinearLayout>
+
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/listenLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/wuliaoContent"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shouju_bj"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/listenImg"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:layout_height="match_parent" />
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/img03delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp"
+            android:src="@drawable/delete"
+            android:visibility="gone" />
+    </com.mapbar.scale.ScaleRelativeLayout>
+</com.mapbar.scale.ScaleRelativeLayout>
+

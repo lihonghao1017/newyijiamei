@@ -14,5 +14,8 @@ public enum EventStatus {
     selectedHos,
     materirList,
     materirItem,
+    showNoOKIemt,
+    commitData,
+    commitDataOk,
 }
 

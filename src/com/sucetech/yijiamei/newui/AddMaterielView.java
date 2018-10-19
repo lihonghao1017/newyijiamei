@@ -40,6 +40,8 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
             yiyaunBean = (com.sucetech.yijiamei.bean.yiyaunBean) obj;
             title.setText(yiyaunBean.name);
             this.setVisibility(View.VISIBLE);
+        }else if(status == EventStatus.commitDataOk){
+            this.setVisibility(View.GONE);
         }
     }
 

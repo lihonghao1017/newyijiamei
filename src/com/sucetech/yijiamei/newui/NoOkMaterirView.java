@@ -1,7 +1,6 @@
 package com.sucetech.yijiamei.newui;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,9 @@ import com.sucetech.yijiamei.bean.FormImage;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.view.BaseView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lihh on 2018/10/18.
  */
@@ -21,9 +23,12 @@ import com.sucetech.yijiamei.view.BaseView;
 public class NoOkMaterirView extends BaseView implements View.OnClickListener {
     private ImageView img01delete, img03delete, img02delete;
     private ImageView img01, img03, img02;
+    private RecoveryMaterirView recoveryMaterirView;
+    private List<FormImage> datas;
 
-    public NoOkMaterirView(Context context, ViewGroup ParentView) {
+    public NoOkMaterirView(Context context, ViewGroup ParentView, RecoveryMaterirView recoveryMaterirView) {
         super(context, ParentView);
+        this.recoveryMaterirView = recoveryMaterirView;
     }
 
     @Override
@@ -31,8 +36,9 @@ public class NoOkMaterirView extends BaseView implements View.OnClickListener {
         switch (status) {
             case imgMsg:
                 FormImage formImage = (FormImage) obj;
-                if (formImage.id == R.id.licensesFile) {
+                if (formImage.id == R.id.paizhaoLayout) {
                     setPhotos(formImage);
+                    datas.add(formImage);
                 }
                 break;
         }
@@ -54,6 +60,7 @@ public class NoOkMaterirView extends BaseView implements View.OnClickListener {
         img01delete.setOnClickListener(this);
         img03delete.setOnClickListener(this);
         img02delete.setOnClickListener(this);
+        datas = new ArrayList<>();
     }
 
     @Override
@@ -79,6 +86,12 @@ public class NoOkMaterirView extends BaseView implements View.OnClickListener {
                 prentView.setVisibility(View.GONE);
                 break;
             case R.id.nextAction:
+                if (datas.size() > 0) {
+                    recoveryMaterirView.setNoOKItem(datas);
+                    this.setVisibility(View.GONE);
+                }else{
+                    Toast.makeText(getContext(), "请拍照不合格证据", Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.paizhaoLayout:
                 if (img01.getTag() == null || img02.getTag() == null || img03.getTag() == null)

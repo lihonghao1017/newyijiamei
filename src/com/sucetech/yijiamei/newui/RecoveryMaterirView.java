@@ -4,13 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.sucetech.yijiamei.R;
+import com.sucetech.yijiamei.bean.CommitDataBean;
+import com.sucetech.yijiamei.bean.FormImage;
 import com.sucetech.yijiamei.bean.RecycleMaterialDetails;
+import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.view.BaseView;
 
@@ -44,8 +45,9 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
                 item.setRecoveryMaterirView(this);
                 wuliaoContent.addView(item);
             }
+        }else if(status == EventStatus.commitDataOk){
+            eidt();
         }
-
     }
 
     @Override
@@ -63,14 +65,18 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.nextAction) {
-
-
+            CommitDataBean commitDataBean=new CommitDataBean();
+            commitDataBean.datas=datas;
+            if (noOkItemView!=null){
+                commitDataBean.imgs=noOkItemView.imgs;
+            }
+            EventManager.getEventManager().notifyObservers(EventStatus.commitData,commitDataBean);
         } else if (v.getId() == R.id.back) {
             eidt();
         } else if (v.getId() == R.id.nohegeLayout) {
             noOKLayout.setVisibility(View.VISIBLE);
             noOKLayout.removeAllViews();
-            noOKLayout.addView(new NoOkMaterirView(getContext(), noOKLayout));
+            noOKLayout.addView(new NoOkMaterirView(getContext(), noOKLayout, this));
         }
     }
 
@@ -78,5 +84,17 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
         this.setVisibility(View.GONE);
         wuliaoContent.removeAllViews();
         datas.clear();
+    }
+
+    private NoOkItemView noOkItemView;
+
+    public void setNoOKItem(List<FormImage> datas) {
+        if (noOkItemView != null){
+            wuliaoContent.removeView(noOkItemView);
+            noOkItemView=null;
+        }
+        noOkItemView = new NoOkItemView(getContext(), wuliaoContent);
+        noOkItemView.updata(EventStatus.showNoOKIemt, datas);
+        wuliaoContent.addView(noOkItemView);
     }
 }

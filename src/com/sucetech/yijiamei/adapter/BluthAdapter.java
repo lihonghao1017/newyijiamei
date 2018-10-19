@@ -44,7 +44,7 @@ public class BluthAdapter extends BaseAdapter{
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.navi_suggist_item_layout, null);
+            convertView = inflater.inflate(R.layout.bluth_item_layout, null);
             holder.name = (TextView) convertView.findViewById(R.id.text1);
             convertView.setTag(holder);
         } else {
