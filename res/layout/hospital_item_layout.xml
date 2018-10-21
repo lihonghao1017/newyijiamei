@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.mapbar.scale.ScaleRelativeLayout
-        android:id="@+id/itemLayout"
+    <com.mapbar.scale.ScaleTextView
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/hospital_item_style"
-        android:orientation="vertical">
-        <com.mapbar.scale.ScaleTextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/black"
-            android:textSize="18dp"
-            />
-
-
-    </com.mapbar.scale.ScaleRelativeLayout>
-
-</com.mapbar.scale.ScaleLinearLayout>
+        android:gravity="center"
+        android:textColor="#424242"
+        android:paddingTop="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingBottom="10dp"
+        android:textSize="28dp" />
+</LinearLayout>

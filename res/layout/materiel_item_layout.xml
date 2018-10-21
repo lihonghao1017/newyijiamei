@@ -42,7 +42,6 @@
                 android:id="@+id/weidth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
                 android:textColor="#C30000"
                 android:textSize="44dp" />
 
@@ -168,6 +167,7 @@
                 android:layout_toRightOf="@id/beishuStr"
                 android:background="@null"
                 android:text="1"
+                android:digits="1234567890."
                 android:textColor="#424242"
                 android:textSize="22dp" />
 
@@ -204,6 +204,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="6dp"
                 android:layout_toRightOf="@id/priceStr"
+                android:digits="1234567890."
                 android:background="@null"
                 android:textColor="#424242"
                 android:textSize="22dp" />

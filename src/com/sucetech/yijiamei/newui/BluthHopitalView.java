@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
+import com.sucetech.yijiamei.UserMsg;
 import com.sucetech.yijiamei.adapter.BluthAdapter;
 import com.sucetech.yijiamei.adapter.HospitalAdapter;
 import com.sucetech.yijiamei.bean.yiyaunBean;
@@ -37,9 +38,9 @@ import java.util.Set;
  * Created by admin on 2018/10/13.
  */
 
-public class BluthHopitalView extends BaseView implements View.OnClickListener,AdapterView.OnItemClickListener{
-    private View userMsg,erweimaIcon,bluthIcon;
-    private GridView hospitalList;
+public class BluthHopitalView extends BaseView implements View.OnClickListener, AdapterView.OnItemClickListener {
+    private View userMsg, erweimaIcon, bluthIcon;
+    private ListView hospitalList;
     private HospitalAdapter hospitalAdapter;
     private List<yiyaunBean> yiyuanData;
     private TextView weightStr;
@@ -51,6 +52,7 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
     private ConBluthView.SCALENOW scalenow = new ConBluthView.SCALENOW();
     private ListView boluthList;
     private List<BluetoothDevice> deviceList;
+    private String bluthMac;
 
     public BluthHopitalView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -58,11 +60,14 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
 
     @Override
     public void updata(EventStatus status, Object obj) {
-        switch (status){
+        switch (status) {
             case hospitalData:
-                if (obj!=null){
+                if (obj != null) {
+                    if (UserMsg.getMac() != null && !UserMsg.getMac().equals("")) {
+                        startBlouth(UserMsg.getMac());
+                    }
                     this.setVisibility(View.VISIBLE);
-                    yiyuanData.addAll ((List<yiyaunBean>) obj);
+                    yiyuanData.addAll((List<yiyaunBean>) obj);
                     hospitalAdapter.notifyDataSetChanged();
                 }
 
@@ -73,47 +78,58 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
 
     @Override
     public void initView(Context context) {
-        View v= LayoutInflater.from(context).inflate(R.layout.bluthhospital_layout,null);
-        userMsg=v.findViewById(R.id.userMsg);
-        erweimaIcon=v.findViewById(R.id.erweimaIcon);
-        bluthIcon=v.findViewById(R.id.bluthLayout);
+        View v = LayoutInflater.from(context).inflate(R.layout.bluthhospital_layout, null);
+        userMsg = v.findViewById(R.id.userMsg);
+        erweimaIcon = v.findViewById(R.id.erweimaIcon);
+        bluthIcon = v.findViewById(R.id.bluthLayout);
         userMsg.setOnClickListener(this);
         erweimaIcon.setOnClickListener(this);
         bluthIcon.setOnClickListener(this);
-        hospitalList=v.findViewById(R.id.hospitalList);
+        hospitalList = v.findViewById(R.id.hospitalList);
         hospitalList.setOnItemClickListener(this);
-        yiyuanData=new ArrayList<>();
-        hospitalAdapter=new HospitalAdapter(getContext(),yiyuanData);
+        yiyuanData = new ArrayList<>();
+        hospitalAdapter = new HospitalAdapter(getContext(), yiyuanData);
         hospitalList.setAdapter(hospitalAdapter);
         this.addView(v);
-        weightStr=v.findViewById(R.id.weightStr);
-        boluthList=v.findViewById(R.id.boluthList);
+        weightStr = v.findViewById(R.id.weightStr);
+        weightStr.setOnClickListener(this);
+        boluthList = v.findViewById(R.id.boluthList);
         boluthList.setOnItemClickListener(this);
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 1:
+                        Log.e("LLL", "1111");
                         ((MainActivity) getContext()).hideProgressDailogView();
                         Bundle bundle = msg.getData();
                         GetWeight(bundle.getByteArray("weight"));
-                        if (scalenow.bOverFlag) {
-                            weightStr.setText("----");
+                        if (scalenow.bOverFlag) {;
                         } else {
                             String wei = scalenow.sformatNetWeight.trim();
-                            if(wei.contains("+")){
-                                wei=wei.replace("+","");
+                            if (wei.contains("+")) {
+                                wei = wei.replace("+", "");
                             }
                             wei = wei.trim();
 
-                            weightStr.setText(wei);
+                            weightStr.setText(wei+"KG");
                             mEventManager.notifyObservers(EventStatus.weight, wei);
                         }
                         weightStr.setVisibility(View.VISIBLE);
                         boluthList.setVisibility(View.GONE);
                         break;
                     case 2:
+                        if (msg.arg1 == 0) {
+                            Toast.makeText(getContext(), "蓝牙链接失败", Toast.LENGTH_SHORT).show();
+                        } else if (msg.arg1 == 1) {
+                            Toast.makeText(getContext(), "蓝牙链接断开", Toast.LENGTH_SHORT).show();
+                        } else if (msg.arg1 == 2) {
+                            UserMsg.saveMac(bluthMac);
+                            Toast.makeText(getContext(), "蓝牙链接成功", Toast.LENGTH_SHORT).show();
+                        }
+                        Log.e("LLL", "2222");
+
                         ((MainActivity) getContext()).hideProgressDailogView();
-                        Toast.makeText(getContext(), "蓝牙链接失败", Toast.LENGTH_SHORT).show();
+
                         weightStr.setVisibility(View.GONE);
                         boluthList.setVisibility(View.VISIBLE);
 //                        if (msg.arg1 < 2) {
@@ -133,29 +149,30 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
         mBl_Scale = new Bluetooth_Scale(getContext(), mHandler);
         initBluth();
     }
-    private void initBluth(){
+
+    private void initBluth() {
         Set<BluetoothDevice> devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
         if (devices.size() > 0) {
             deviceList = new ArrayList<>();
             for (BluetoothDevice device : devices) {
                 deviceList.add(device);
             }
-            boluthList.setAdapter(new BluthAdapter(getContext(),deviceList));
+            boluthList.setAdapter(new BluthAdapter(getContext(), deviceList));
         }
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.erweimaIcon:
                 Intent openCameraIntent = new Intent(getContext(), CaptureActivity.class);
                 ((MainActivity) getContext()).startActivityForResult(openCameraIntent, R.id.speedLayout);
                 break;
             case R.id.bluthLayout:
                 bluthIcon.setSelected(!bluthIcon.isSelected());
-                if (bluthIcon.isSelected()){
+                if (bluthIcon.isSelected()) {
                     boluthList.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     boluthList.setVisibility(View.GONE);
                 }
 
@@ -164,22 +181,24 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
         }
 
     }
-    public void onDestroy(){
 
+    public void onDestroy() {
+        if (mBl_Scale != null) mBl_Scale.stop();
+        System.exit(0);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        if(adapterView.getId()==R.id.boluthList){
-           String mac= deviceList.get(i).getAddress();
-           startBlouth(mac);
-        }else{
-            for (yiyaunBean bean:yiyuanData){
-                bean.isSeleted=false;
+        if (adapterView.getId() == R.id.boluthList) {
+            String mac = deviceList.get(i).getAddress();
+            startBlouth(mac);
+        } else {
+            for (yiyaunBean bean : yiyuanData) {
+                bean.isSeleted = false;
             }
-            yiyuanData.get(i).isSeleted=true;
+            yiyuanData.get(i).isSeleted = true;
             hospitalAdapter.notifyDataSetChanged();
-            EventManager.getEventManager().notifyObservers(EventStatus.selectedHos,yiyuanData.get(i));
+            EventManager.getEventManager().notifyObservers(EventStatus.selectedHos, yiyuanData.get(i));
 
         }
 
@@ -207,6 +226,7 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
     }
 
     private void connectBluth(String bluth) {
+        bluthMac=bluth;
         if (mBluetoothAdapter.enable()) {
             try {
                 device = mBluetoothAdapter.getRemoteDevice(bluth);
@@ -224,6 +244,7 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener,A
             mHandler.sendMessageDelayed(message, 1000);
         }
     }
+
     void GetWeight(byte[] databuf) {
         int i, j, offset = 6;
         boolean StartFalg = false;

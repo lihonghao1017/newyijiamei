@@ -52,6 +52,7 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
         nextAction.setOnClickListener(this);
         wuliaoContent = v.findViewById(R.id.wuliaoContent);
         title = v.findViewById(R.id.title);
+        v.findViewById(R.id.addLayout).setOnClickListener(this);
         v.findViewById(R.id.back).setOnClickListener(this);
         this.addView(v, -1, -1);
     }
@@ -61,7 +62,7 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
         if (view.getId() == R.id.nextAction) {
             int count = wuliaoContent.getChildCount();
             List<RecycleMaterialDetails> datas = new ArrayList<>();
-            for (int i = 0; i < count - 1; i++) {
+            for (int i = 0; i < count; i++) {
                 MaterielItemView itemView = (MaterielItemView) wuliaoContent.getChildAt(i);
                 RecycleMaterialDetails item = itemView.getRecycleMaterialDetails();
                 if (item != null) {
@@ -78,6 +79,8 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
         } else if (view.getId() == R.id.back) {
             this.setVisibility(View.GONE);
 
+        }else if(view.getId() == R.id.addLayout){
+            wuliaoContent.addView(new MaterielItemView(getContext(), wuliaoContent));
         }
 
     }

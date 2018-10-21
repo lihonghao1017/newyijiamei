@@ -7,7 +7,7 @@
     <com.mapbar.scale.ScaleRelativeLayout
         android:id="@+id/titleLayout"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:background="@color/baseColor"
         android:orientation="vertical">
 
@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:text="收据信息"
             android:textColor="@android:color/white"
-            android:textSize="24dp" />
+            android:textSize="30dp" />
     </com.mapbar.scale.ScaleRelativeLayout>
 
     <com.mapbar.scale.ScaleRelativeLayout
@@ -42,6 +42,7 @@
             android:gravity="center_vertical"
             android:hint="请输入单据号"
             android:background="@android:color/transparent"
+            android:digits="1234567890."
             android:textColor="#B5B5B5"
             android:textSize="22dp" />
 

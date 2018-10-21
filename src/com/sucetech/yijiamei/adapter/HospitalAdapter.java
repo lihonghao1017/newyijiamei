@@ -45,13 +45,13 @@ public class HospitalAdapter extends BaseAdapter {
             view=inflater.inflate(R.layout.hospital_item_layout,null);
             viewHolder=new ViewHolder();
             viewHolder.name=view.findViewById(R.id.name);
-            viewHolder.itemLayout=view.findViewById(R.id.itemLayout);
+//            viewHolder.itemLayout=view.findViewById(R.id.itemLayout);
             view.setTag(viewHolder);
         }else{
             viewHolder= (ViewHolder) view.getTag();
         }
         viewHolder.name.setText(data.get(i).name);
-        viewHolder.itemLayout.setSelected(data.get(i).isSeleted);
+//        viewHolder.itemLayout.setSelected(data.get(i).isSeleted);
         return view;
     }
     class ViewHolder{

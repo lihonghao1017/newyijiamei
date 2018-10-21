@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
     private List<WuLiaoBean> datas;
     private boolean isCreatNextItem;
     public RecycleMaterialDetails recycleMaterialDetails;
+    private boolean isWeightOK;
 
     public MaterielItemView(Context context, ViewGroup ParentView) {
         super(context, ParentView);
@@ -40,6 +42,10 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
     public void updata(EventStatus status, Object obj) {
         if (status == EventStatus.weight) {
             weight = (String) obj;
+            if (weight!=null&&!weight.equals("")&&!isWeightOK) {
+                weidth.setText(weight);
+                isWeightOK=true;
+            }
         }
     }
 
@@ -51,8 +57,10 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
         updata = v.findViewById(R.id.updata);
         weidth =  v.findViewById(R.id.weidth);
         beishu=v.findViewById(R.id.beishu);
+        beishu.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         type =  v.findViewById(R.id.type);
         price = v.findViewById(R.id.price);
+        price.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         delete.setOnClickListener(this);
         updata.setOnClickListener(this);
         type.setOnClickListener(this);
@@ -82,11 +90,12 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
                 break;
             case R.id.updata:
                 if (weight != null) {
+                    isWeightOK=true;
                     weidth.setText(weight);
-                    if (!isCreatNextItem&& !type.getText().toString().equals("") && type.getText().toString() != null) {
-                        prentView.addView(new MaterielItemView(getContext(), prentView));
-                        isCreatNextItem=true;
-                    }
+//                    if (!isCreatNextItem&& !type.getText().toString().equals("") && type.getText().toString() != null) {
+//                        prentView.addView(new MaterielItemView(getContext(), prentView));
+//                        isCreatNextItem=true;
+//                    }
                 }
                 break;
             case R.id.delete:
@@ -102,10 +111,10 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
         recycleMaterialDetails.typeName=str;
         recycleMaterialDetails.type = position;
         mSuggistPopView.dismiss();
-        if (!isCreatNextItem && !weidth.getText().toString().equals("") && weidth.getText().toString() != null) {
-            prentView.addView(new MaterielItemView(getContext(), prentView));
-            isCreatNextItem=true;
-        }
+//        if (!isCreatNextItem && !weidth.getText().toString().equals("") && weidth.getText().toString() != null) {
+//            prentView.addView(new MaterielItemView(getContext(), prentView));
+//            isCreatNextItem=true;
+//        }
     }
     public RecycleMaterialDetails getRecycleMaterialDetails(){
         if ( weidth.getText().toString() == null||weidth.getText().toString().equals("")){

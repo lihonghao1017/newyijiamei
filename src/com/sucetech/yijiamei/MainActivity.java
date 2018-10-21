@@ -28,6 +28,7 @@ import com.sucetech.yijiamei.bean.FormImage;
 import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.newui.BluthHopitalView;
+import com.sucetech.yijiamei.newui.CommitView;
 import com.sucetech.yijiamei.utils.BitmapUtils;
 import com.sucetech.yijiamei.utils.PhotoUtils;
 import com.sucetech.yijiamei.view.ProgressDailogView;
@@ -40,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 
 public class MainActivity extends Activity {
+    private CommitView mCommitView;
     public BluthHopitalView mConBluthView;
     private ProgressDailogView progressDailogView;
     private int REQUEST_CAMERA = 0x001;
@@ -73,7 +75,7 @@ public class MainActivity extends Activity {
         progressDailogView = (ProgressDailogView) findViewById(R.id.progressDailogView);
 //        toastView= (ToastView) findViewById(R.id.myToast);
          locationg= (TextView) findViewById(R.id.locationg);
-
+         mCommitView=findViewById(R.id.commitView);
 
          Window window = this.getWindow();
          //取消状态栏透明
@@ -240,9 +242,12 @@ public class MainActivity extends Activity {
             if (requestCode == R.id.speedLayout) {
                 Bundle bundle = data.getExtras();
                 String scanResult = bundle.getString("result");
-                UserMsg.saveMac(scanResult);
                 mConBluthView.startBlouth(scanResult);
-            } else if (requestCode == CODE_CAMERA_REQUEST) {
+            } else if(requestCode == R.id.saoyisaoLayout){
+                Bundle bundle = data.getExtras();
+                String scanResult = bundle.getString("result");
+                mCommitView.setDanjuHao(scanResult);
+            }   else if (requestCode == CODE_CAMERA_REQUEST) {
 //                Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri, this);
                 String newFile = fileUri.getParent() + "yijiamei_" + fileUri.getName();
                 Bitmap bitmap = BitmapUtils.getSmallBitmap(fileUri.getPath(), 480, 480, new File(newFile));

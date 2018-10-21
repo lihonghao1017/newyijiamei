@@ -7,7 +7,7 @@
     <com.mapbar.scale.ScaleRelativeLayout
         android:id="@+id/titleLayout"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:background="@color/baseColor"
         android:orientation="vertical">
 
@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:text="添加不合格物料"
             android:textColor="@android:color/white"
-            android:textSize="24dp" />
+            android:textSize="30dp" />
     </com.mapbar.scale.ScaleRelativeLayout>
 
     <com.mapbar.scale.ScaleTextView

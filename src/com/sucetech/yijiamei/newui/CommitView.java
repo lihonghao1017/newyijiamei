@@ -1,10 +1,12 @@
 package com.sucetech.yijiamei.newui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.utils.FileUtils;
 import com.sucetech.yijiamei.utils.TaskManager;
 import com.sucetech.yijiamei.view.BaseView;
+import com.zxing.activity.CaptureActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,9 +81,11 @@ public class CommitView extends BaseView implements View.OnClickListener {
         v.findViewById(R.id.clear).setOnClickListener(this);
         v.findViewById(R.id.nextAction).setOnClickListener(this);
         v.findViewById(R.id.shoujupaizhaoLayout).setOnClickListener(this);
+        v.findViewById(R.id.saoyisaoLayout).setOnClickListener(this);
         paizhao = v.findViewById(R.id.paizhao);
         listenImg=v.findViewById(R.id.listenImg);
         editText = v.findViewById(R.id.inputET);
+        editText.setInputType(EditorInfo.TYPE_CLASS_PHONE);
     }
 
     @Override
@@ -112,6 +117,15 @@ public class CommitView extends BaseView implements View.OnClickListener {
             case R.id.shoujupaizhaoLayout:
                 ((MainActivity) getContext()).requestPicture(R.id.shoujupaizhaoLayout);
                 break;
+            case R.id.saoyisaoLayout:
+                Intent openCameraIntent = new Intent(getContext(), CaptureActivity.class);
+                ((MainActivity) getContext()).startActivityForResult(openCameraIntent, R.id.saoyisaoLayout);
+                break;
+        }
+    }
+    public void setDanjuHao(String nub){
+        if (nub!=null&&!nub.equals("")){
+            editText.setText(nub);
         }
     }
 

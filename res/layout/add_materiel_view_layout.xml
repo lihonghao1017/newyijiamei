@@ -6,7 +6,7 @@
     <com.mapbar.scale.ScaleRelativeLayout
         android:id="@+id/titleLayout"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:background="@color/baseColor"
         android:orientation="vertical">
 
@@ -24,8 +24,32 @@
             android:layout_centerHorizontal="true"
             android:text="回收系统"
             android:textColor="@android:color/white"
-            android:textSize="24dp" />
+            android:textSize="30dp" />
+        <com.mapbar.scale.ScaleLinearLayout
+            android:id="@+id/addLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <com.mapbar.scale.ScaleTextView
+                android:id="@+id/addText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="增加物料"
+                android:textColor="@android:color/white"
+                android:textSize="19dp" />
+
+            <com.mapbar.scale.ScaleImageView
+                android:id="@+id/addIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/nohegei_addcon" />
+        </com.mapbar.scale.ScaleLinearLayout>
     </com.mapbar.scale.ScaleRelativeLayout>
 
     <com.mapbar.scale.ScaleTextView
