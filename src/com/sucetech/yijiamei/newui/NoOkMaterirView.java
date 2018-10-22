@@ -1,6 +1,7 @@
 package com.sucetech.yijiamei.newui;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.bean.FormImage;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.view.BaseView;
+import com.sucetech.yijiamei.view.voice.AudioRecorder;
+import com.sucetech.yijiamei.view.voice.RecordButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ public class NoOkMaterirView extends BaseView implements View.OnClickListener {
     private ImageView img01, img03, img02;
     private RecoveryMaterirView recoveryMaterirView;
     private List<FormImage> datas;
+    private RecordButton mRecordButton;
 
     public NoOkMaterirView(Context context, ViewGroup ParentView, RecoveryMaterirView recoveryMaterirView) {
         super(context, ParentView);
@@ -61,6 +65,17 @@ public class NoOkMaterirView extends BaseView implements View.OnClickListener {
         img03delete.setOnClickListener(this);
         img02delete.setOnClickListener(this);
         datas = new ArrayList<>();
+        mRecordButton = (RecordButton) v.findViewById(R.id.btn_record);
+        mRecordButton.setAudioRecord(new AudioRecorder());
+        //语音发送的回调
+        mRecordButton.setRecordListener(new RecordButton.RecordListener() {
+            @Override
+            public void recordEnd(String filePath, float time) {
+//                voiceFile.setText(filePath);
+                Log.e("LLL", "filePath-->" + filePath);
+                Log.e("LLL", "time-->" + time);//秒
+            }
+        });
     }
 
     @Override

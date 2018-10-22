@@ -16,13 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mapbar.scale.ScaleImageView;
 import com.sucetech.yijiamei.R;
 
 
 /***
  * madreain 录音控件
  */
-public class RecordButton extends Button {
+public class RecordButton extends ScaleImageView {
 
     private static final int MIN_RECORD_TIME = 1; // 最短录音时间，单位秒
     private static final int MAX_RECORD_TIME = 60;//最长录音时间，单位秒
@@ -66,7 +67,7 @@ public class RecordButton extends Button {
 
     private void init(Context context) {
         mContext = context;
-        this.setText("按住说话");
+//        this.setText("按住说话");
     }
 
     public void setAudioRecord(RecordStrategy record) {
@@ -100,7 +101,7 @@ public class RecordButton extends Button {
 //			dialogTextView.setText("松开手指可取消录音");
 //			this.setText("松开手指 取消录音");
                 dialogTextView.setText("松指取消发送");
-                this.setText("松开结束");
+//                this.setText("松开结束");
                 break;
 
             //最长录音时间剩余时间的提醒
@@ -121,7 +122,7 @@ public class RecordButton extends Button {
 //			dialogTextView.setText("向上滑动可取消录音");
 //			this.setText("松开手指 完成录音");
                 dialogTextView.setText("上滑取消发送");
-                this.setText("松开结束");
+//                this.setText("松开结束");
                 break;
         }
         dialogTextView.setTextSize(14);
@@ -328,7 +329,7 @@ public class RecordButton extends Button {
                         }
                     }
                     isCanceled = false;
-                    this.setText("按住说话");
+//                    this.setText("按住说话");
                 }
                 break;
         }

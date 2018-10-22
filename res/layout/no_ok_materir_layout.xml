@@ -80,11 +80,20 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.mapbar.scale.ScaleImageView
+          <!--  <com.mapbar.scale.ScaleImageView
                 android:id="@+id/yuyin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/yuyinicon" />
+                android:src="@drawable/yuyinicon" />-->
+
+            <com.sucetech.yijiamei.view.voice.RecordButton
+                android:id="@+id/btn_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/yuyinicon"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center" />
 
             <com.mapbar.scale.ScaleTextView
                 android:id="@+id/yuyinStr"
@@ -93,6 +102,8 @@
                 android:text="语音描述"
                 android:textColor="@color/baseColor"
                 android:textSize="22dp" />
+
+
 
         </com.mapbar.scale.ScaleLinearLayout>
     </com.mapbar.scale.ScaleLinearLayout>
