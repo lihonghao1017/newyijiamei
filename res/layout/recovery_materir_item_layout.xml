@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="类型"
-            android:textColor="#ABABAB"
+            android:textColor="#4D4D4D"
             android:textSize="22dp" />
 
         <com.mapbar.scale.ScaleTextView
@@ -35,7 +35,7 @@
             android:layout_marginTop="6dp"
             android:layout_below="@id/typeStr"
             android:text="价格"
-            android:textColor="#ABABAB"
+            android:textColor="#4D4D4D"
             android:textSize="22dp" />
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/price"
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="重量"
-            android:textColor="#ABABAB"
+            android:textColor="#4D4D4D"
             android:textSize="22dp" />
 
         <com.mapbar.scale.ScaleTextView
@@ -79,7 +79,7 @@
             android:layout_marginTop="6dp"
             android:layout_below="@id/weidthStr"
             android:text="倍数"
-            android:textColor="#ABABAB"
+            android:textColor="#4D4D4D"
             android:textSize="22dp" />
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/beishu"

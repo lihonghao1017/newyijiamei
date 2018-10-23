@@ -53,7 +53,7 @@
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
             android:text="点击上方按钮扫二维码"
-            android:textColor="#BABABA"
+            android:textColor="#4D4D4D"
             android:textSize="20dp" />
 
         <com.mapbar.scale.ScaleLinearLayout
@@ -106,7 +106,7 @@
             android:background="#ffffff"
             android:gravity="center"
             android:textColor="#07923A"
-            android:textSize="68dp"
+            android:textSize="78dp"
             android:textStyle="bold"
             android:visibility="gone" />
     </com.mapbar.scale.ScaleRelativeLayout>

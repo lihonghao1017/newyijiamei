@@ -111,7 +111,7 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener, 
                             }
                             wei = wei.trim();
 
-                            weightStr.setText(wei+"KG");
+                            weightStr.setText(wei+" KG");
                             mEventManager.notifyObservers(EventStatus.weight, wei);
                         }
                         weightStr.setVisibility(View.VISIBLE);
