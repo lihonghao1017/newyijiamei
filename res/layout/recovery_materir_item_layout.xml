@@ -16,17 +16,16 @@
             android:layout_height="wrap_content"
             android:text="类型"
             android:textColor="#4D4D4D"
-            android:textSize="22dp" />
+            android:textSize="26dp" />
 
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/typeStr"
             android:textColor="#424242"
-            android:textSize="22dp" />
+            android:textSize="26dp" />
 
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/priceStr"
@@ -36,7 +35,7 @@
             android:layout_below="@id/typeStr"
             android:text="价格"
             android:textColor="#4D4D4D"
-            android:textSize="22dp" />
+            android:textSize="26dp" />
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
@@ -46,7 +45,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="6dp"
             android:textColor="#424242"
-            android:textSize="22dp" />
+            android:textSize="26dp" />
     </com.mapbar.scale.ScaleRelativeLayout>
     <com.mapbar.scale.ScaleRelativeLayout
         android:id="@+id/item02"
@@ -60,17 +59,16 @@
             android:layout_height="wrap_content"
             android:text="重量"
             android:textColor="#4D4D4D"
-            android:textSize="22dp" />
+            android:textSize="26dp" />
 
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/weidth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="6dp"
             android:layout_toRightOf="@id/weidthStr"
             android:textColor="#424242"
-            android:textSize="22dp" />
+            android:textSize="26dp" />
 
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/beishuStr"
@@ -80,7 +78,7 @@
             android:layout_below="@id/weidthStr"
             android:text="倍数"
             android:textColor="#4D4D4D"
-            android:textSize="22dp" />
+            android:textSize="26dp" />
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/beishu"
             android:layout_width="wrap_content"
@@ -90,7 +88,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="6dp"
             android:textColor="#424242"
-            android:textSize="22dp" />
+            android:textSize="26dp" />
     </com.mapbar.scale.ScaleRelativeLayout>
     <com.mapbar.scale.ScaleImageView
         android:id="@+id/edit"

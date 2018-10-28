@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="增加物料"
                 android:textColor="@android:color/white"
-                android:textSize="19dp" />
+                android:textSize="24dp" />
 
             <com.mapbar.scale.ScaleImageView
                 android:id="@+id/addIcon"

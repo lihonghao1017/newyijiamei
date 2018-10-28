@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="不合格物料"
                 android:textColor="@android:color/white"
-                android:textSize="14dp" />
+                android:textSize="24dp" />
 
             <com.mapbar.scale.ScaleImageView
                 android:id="@+id/noHegeIcon"
