@@ -30,10 +30,10 @@ public class AudioRecorder implements RecordStrategy {
 		}
 		fileName = getCurrentDate();
 		recorder = new MediaRecorder();
-		recorder.setOutputFile(fileFolder + "/" + fileName + ".amr");
+		recorder.setOutputFile(fileFolder + "/" + fileName + ".m4a");
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 设置MediaRecorder的音频源为麦克风
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);// 设置MediaRecorder录制的音频格式
-		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);// 设置MediaRecorder录制音频的编码为amr
+		recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);// 设置MediaRecorder录制的音频格式
+		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);// 设置MediaRecorder录制音频的编码为amr
 	}
 
 	// 以当前时间作为文件名
@@ -118,7 +118,7 @@ public class AudioRecorder implements RecordStrategy {
 	@Override
 	public String getFilePath() {
 		// TODO Auto-generated method stub
-		return fileFolder + "/" + fileName + ".amr";
+		return fileFolder + "/" + fileName + ".m4a";
 	}
 
 }
