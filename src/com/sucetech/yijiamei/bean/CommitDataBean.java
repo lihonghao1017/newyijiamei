@@ -9,4 +9,5 @@ import java.util.List;
 public class CommitDataBean {
     public List<RecycleMaterialDetails> datas;
     public List<FormImage> imgs;
+    public String audioFile;
 }

@@ -224,7 +224,8 @@ public class RecordButton extends ScaleImageView {
                         recodeTime += 0.1;
                         // 获取音量，更新dialog
                         if (!isCanceled) {
-                            voiceValue = mAudioRecorder.getAmplitude();
+
+
                             recordHandler.sendEmptyMessage(1);
                         }
                     } catch (InterruptedException e) {
@@ -239,6 +240,7 @@ public class RecordButton extends ScaleImageView {
     private Handler recordHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            voiceValue = mAudioRecorder.getAmplitude();
             setDialogImage();
             setDialogTime();
         }

@@ -27,6 +27,7 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
     private List<RecycleMaterialDetails> datas;
     private LinearLayout wuliaoContent;
     private RelativeLayout noOKLayout;
+    private String audioFile;
 
     public RecoveryMaterirView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -88,11 +89,12 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
 
     private NoOkItemView noOkItemView;
 
-    public void setNoOKItem(List<FormImage> datas) {
+    public void setNoOKItem(List<FormImage> datas,String audio) {
         if (noOkItemView != null){
             wuliaoContent.removeView(noOkItemView);
             noOkItemView=null;
         }
+        audioFile=audio;
         noOkItemView = new NoOkItemView(getContext(), wuliaoContent);
         noOkItemView.updata(EventStatus.showNoOKIemt, datas);
         wuliaoContent.addView(noOkItemView);

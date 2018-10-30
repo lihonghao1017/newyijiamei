@@ -31,7 +31,7 @@ public class AudioRecorder implements RecordStrategy {
 		fileName = getCurrentDate();
 		recorder = new MediaRecorder();
 		recorder.setOutputFile(fileFolder + "/" + fileName + ".amr");
-		recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);// 设置MediaRecorder的音频源为麦克风
+		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);// 设置MediaRecorder的音频源为麦克风
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);// 设置MediaRecorder录制的音频格式
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);// 设置MediaRecorder录制音频的编码为amr
 	}

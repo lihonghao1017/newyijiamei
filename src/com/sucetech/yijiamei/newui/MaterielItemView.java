@@ -96,6 +96,8 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
 //                        prentView.addView(new MaterielItemView(getContext(), prentView));
 //                        isCreatNextItem=true;
 //                    }
+                }else{
+                    weidth.setText("0");
                 }
                 break;
             case R.id.delete:

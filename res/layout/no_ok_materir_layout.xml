@@ -191,9 +191,9 @@
             android:id="@+id/btn_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/yuyinicon"
-            android:layout_marginTop="4dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/yuyinicon"
             android:gravity="center" />
 
         <com.mapbar.scale.ScaleTextView
@@ -205,6 +205,29 @@
             android:textSize="22dp" />
 
 
+    </com.mapbar.scale.ScaleLinearLayout>
+
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:id="@+id/voiceLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tupianLayout"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/soundicon"
+             />
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="26dp"
+            android:textColor="@color/baseColor"/>
 
     </com.mapbar.scale.ScaleLinearLayout>
 </com.mapbar.scale.ScaleRelativeLayout>

@@ -147,13 +147,16 @@ public class CommitView extends BaseView implements View.OnClickListener {
                     builder.addFormDataPart("faileds", "failedImg01.png",
                             RequestBody.create(MediaType.get("image/jpg"), FileUtils.getFile(commitDataBean.imgs.get(i).mFileName)));
                 }
+                if (commitDataBean.audioFile!=null){
+                    File audioFile=new File(commitDataBean.audioFile);
+                    if (audioFile.exists()){
+                        builder.addFormDataPart("audio", audioFile.getName(),
+                                RequestBody.create(MediaType.get("audio/amr"), FileUtils.getFile(commitDataBean.audioFile)));
+                    }
+                }
             }
             builder.addFormDataPart("licenses", lictence.getName(),
                     RequestBody.create(MediaType.get("image/jpg"), FileUtils.getFile(license)));
-//            if (audio != null && !audio.equals("")) {
-//                builder.addFormDataPart("audio", audioFile.getName(),
-//                        RequestBody.create(MediaType.get("audio/amr"), FileUtils.getFile(audio)));
-//            }
             String url = "http://60.205.139.90:81/api/v1/yijiamei/recycle";
             Request request = new Request.Builder()
                     .url(url)
