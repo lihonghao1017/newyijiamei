@@ -94,7 +94,7 @@ public class NoOkMaterirView extends BaseView implements View.OnClickListener {
                 Log.e("LLL", "filePath-->" + filePath);
                 Log.e("LLL", "time-->" + time);//秒
                 audioPath=filePath;
-                voiceLayout.setVisibility(View.VISIBLE);
+//                voiceLayout.setVisibility(View.VISIBLE);
                 //设置播放音频数据文件
                 try {
                     mediaPlayer = new MediaPlayer();

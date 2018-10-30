@@ -10,18 +10,42 @@
     <com.mapbar.scale.ScaleImageView
         android:id="@+id/img01"
         android:layout_width="110dp"
+        android:visibility="gone"
         android:layout_height="110dp" />
 
     <com.mapbar.scale.ScaleImageView
         android:id="@+id/img02"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_marginLeft="20dp" />
+        android:visibility="gone"
+        android:layout_marginLeft="10dp" />
 
     <com.mapbar.scale.ScaleImageView
         android:id="@+id/img03"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_marginLeft="20dp" />
+        android:visibility="gone"
+        android:layout_marginLeft="10dp" />
+    <com.mapbar.scale.ScaleLinearLayout
+        android:id="@+id/voiceLayout"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/soundicon"
+            />
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="26dp"
+            android:textColor="@color/baseColor"/>
 
+    </com.mapbar.scale.ScaleLinearLayout>
 </com.mapbar.scale.ScaleLinearLayout>

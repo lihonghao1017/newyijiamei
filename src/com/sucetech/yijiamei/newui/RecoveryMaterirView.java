@@ -97,6 +97,7 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
         audioFile=audio;
         noOkItemView = new NoOkItemView(getContext(), wuliaoContent);
         noOkItemView.updata(EventStatus.showNoOKIemt, datas);
+        noOkItemView.showSoundLayout(audioFile);
         wuliaoContent.addView(noOkItemView);
     }
 }
