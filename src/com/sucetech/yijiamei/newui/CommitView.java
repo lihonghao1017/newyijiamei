@@ -19,6 +19,7 @@ import com.sucetech.yijiamei.bean.CommitDataBean;
 import com.sucetech.yijiamei.bean.FormImage;
 import com.sucetech.yijiamei.bean.RecycleMaterial;
 import com.sucetech.yijiamei.bean.RecycleMaterialDto;
+import com.sucetech.yijiamei.bean.yiyaunBean;
 import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.utils.FileUtils;
@@ -45,6 +46,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
     private ImageView paizhao,listenImg;
     private CommitDataBean commitDataBean;
     private RecycleMaterialDto recycleMaterialDto = new RecycleMaterialDto();
+    private com.sucetech.yijiamei.bean.yiyaunBean yiyaunBean;
 
     public CommitView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -69,6 +71,11 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 this.setVisibility(View.GONE);
                 editText.setText("");
                 listenImg.setImageDrawable(null);
+                break;
+            case selectedHos:
+                yiyaunBean = (com.sucetech.yijiamei.bean.yiyaunBean) obj;
+                recycleMaterialDto.material = new RecycleMaterial();
+                recycleMaterialDto.material.medicalId=yiyaunBean.id;
                 break;
         }
     }
@@ -100,7 +107,6 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 editText.setText("");
                 break;
             case R.id.nextAction:
-                recycleMaterialDto.material = new RecycleMaterial();
                 recycleMaterialDto.material.licenseNumber = editText.getText().toString();
                 final FormImage formImage = (FormImage) listenImg.getTag();
                 if (formImage != null) {

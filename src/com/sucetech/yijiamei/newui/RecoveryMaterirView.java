@@ -68,6 +68,7 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
         if (v.getId() == R.id.nextAction) {
             CommitDataBean commitDataBean=new CommitDataBean();
             commitDataBean.datas=datas;
+            commitDataBean.audioFile=audioFile;
             if (noOkItemView!=null){
                 commitDataBean.imgs=noOkItemView.imgs;
             }
