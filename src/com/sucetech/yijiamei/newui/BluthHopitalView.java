@@ -22,6 +22,7 @@ import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.UserMsg;
 import com.sucetech.yijiamei.adapter.BluthAdapter;
 import com.sucetech.yijiamei.adapter.HospitalAdapter;
+import com.sucetech.yijiamei.bean.WuiaoYiyuanBean;
 import com.sucetech.yijiamei.bean.yiyaunBean;
 import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
@@ -57,6 +58,7 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener, 
     public BluthHopitalView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+    public WuiaoYiyuanBean wuiaoYiyuanBean;
 
     @Override
     public void updata(EventStatus status, Object obj) {
@@ -66,8 +68,9 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener, 
                     if (UserMsg.getMac() != null && !UserMsg.getMac().equals("")) {
                         startBlouth(UserMsg.getMac());
                     }
+                    wuiaoYiyuanBean= (WuiaoYiyuanBean) obj;
                     this.setVisibility(View.VISIBLE);
-                    yiyuanData.addAll((List<yiyaunBean>) obj);
+                    yiyuanData.addAll(wuiaoYiyuanBean.yiyaunBeanList);
                     hospitalAdapter.notifyDataSetChanged();
                 }
 
@@ -199,6 +202,7 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener, 
             yiyuanData.get(i).isSeleted = true;
             hospitalAdapter.notifyDataSetChanged();
             EventManager.getEventManager().notifyObservers(EventStatus.selectedHos, yiyuanData.get(i));
+            EventManager.getEventManager().notifyObservers(EventStatus.wuliaoType, wuiaoYiyuanBean.wuliaoTypes);
 
         }
 

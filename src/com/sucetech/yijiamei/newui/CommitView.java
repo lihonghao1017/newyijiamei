@@ -157,7 +157,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
             }
             builder.addFormDataPart("licenses", lictence.getName(),
                     RequestBody.create(MediaType.get("image/jpg"), FileUtils.getFile(license)));
-            String url = "http://60.205.139.90:81/api/v1/yijiamei/recycle";
+            String url = "http://www.yijiamei.net/api/v1/yijiamei/recycle";
             Request request = new Request.Builder()
                     .url(url)
                     .header("Authorization", UserMsg.getToken())

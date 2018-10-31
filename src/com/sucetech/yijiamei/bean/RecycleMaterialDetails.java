@@ -35,5 +35,6 @@ public class RecycleMaterialDetails {
      */
     public Byte flowType;
     public float multiple;
+    public int orgId;
 
 }

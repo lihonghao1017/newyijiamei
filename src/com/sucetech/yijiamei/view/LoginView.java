@@ -13,6 +13,8 @@ import com.google.gson.reflect.TypeToken;
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.UserMsg;
+import com.sucetech.yijiamei.bean.WuiaoYiyuanBean;
+import com.sucetech.yijiamei.bean.WuliaoType;
 import com.sucetech.yijiamei.bean.yiyaunBean;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.utils.TaskManager;
@@ -35,6 +37,7 @@ import okhttp3.Response;
 public class LoginView extends BaseView implements View.OnClickListener {
     private EditText user, pwd;
     private View commit;
+    private WuiaoYiyuanBean wuiaoYiyuanBean;
 
     public LoginView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -59,6 +62,7 @@ public class LoginView extends BaseView implements View.OnClickListener {
         this.addView(v, -1, -1);
         user.setText(UserMsg.getUserName());
         pwd.setText(UserMsg.getPwd());
+        wuiaoYiyuanBean=new WuiaoYiyuanBean();
     }
 
     @Override
@@ -91,7 +95,7 @@ public class LoginView extends BaseView implements View.OnClickListener {
         }
         RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
         Request request = new Request.Builder()
-                .url("http://60.205.139.90:81/api/v1/yijiamei/login")
+                .url("http://www.yijiamei.net/api/v1/yijiamei/login")
                 .post(body)
                 .build();
         try {
@@ -137,7 +141,7 @@ public class LoginView extends BaseView implements View.OnClickListener {
         Request request = new Request.Builder()
                 .header("Authorization", UserMsg.getToken())
                 .addHeader("Accept", "application/json")
-                .url("http://60.205.139.90:81/api/v1/yijiamei/medical/")
+                .url("http://www.yijiamei.net/api/v1/yijiamei/medical/")
                 .get()
                 .build();
         try {
@@ -147,16 +151,65 @@ public class LoginView extends BaseView implements View.OnClickListener {
 //                Log.e("LLL","chenggong--requestYiyuan22->"+response.body().string());
 //                UserMsg.saveYiyuan(response.body().string());
                 final List<yiyaunBean> data= new Gson().fromJson(response.body().string(), new TypeToken<List<yiyaunBean>>(){}.getType());//把JSON字符串转为对象
-
                 Log.e("LLL", "chenggong--requestYiyuan->" + UserMsg.getYiyuan());
+                wuiaoYiyuanBean.yiyaunBeanList=data;
                 this.post(new Runnable() {
                     @Override
                     public void run() {
-                        ((MainActivity) getContext()).hideProgressDailogView();
-                        mEventManager.notifyObservers(EventStatus.hospitalData, data);
-                        LoginView.this.setVisibility(View.GONE);
+                        if (wuiaoYiyuanBean.wuliaoTypes!=null&&wuiaoYiyuanBean.wuliaoTypes.size()>0){
+                            ((MainActivity) getContext()).hideProgressDailogView();
+                            mEventManager.notifyObservers(EventStatus.hospitalData, data);
+                            LoginView.this.setVisibility(View.GONE);
 //                        mEventManager.notifyObservers(EventStatus.logined,null);
-                        Toast.makeText(getContext(), "chengong -->", Toast.LENGTH_LONG);
+                            Toast.makeText(getContext(), "chengong -->", Toast.LENGTH_LONG);
+                        }
+                    }
+                });
+                getMeteriType();
+//
+//                return response.body().string();
+            } else {
+                Log.e("LLL", "shibai---requestYiyuan>");
+//                ((MainActivity)getContext()).hideProgressDailogView();
+                this.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), "shibai --requestYiyuan>", Toast.LENGTH_LONG);
+                    }
+                });
+//                Toast.makeText(getContext(),"shibai -->"+response.message(),Toast.LENGTH_LONG);
+                throw new IOException("Unexpected code " + response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void getMeteriType(){
+        Request request = new Request.Builder()
+                .header("Authorization", UserMsg.getToken())
+                .addHeader("Accept", "application/json")
+                .url("http://www.yijiamei.net/api/v1/yijiamei/materialType")
+                .get()
+                .build();
+        try {
+            final Response response = ((MainActivity) getContext()).client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                Log.e("LLL", "chenggong--getMeteriType->");
+//                Log.e("LLL","chenggong--getMeteriType->"+response.body().string());
+//                UserMsg.saveYiyuan(response.body().string());
+                final List<WuliaoType> data= new Gson().fromJson(response.body().string(), new TypeToken<List<WuliaoType>>(){}.getType());//把JSON字符串转为对象
+   wuiaoYiyuanBean.wuliaoTypes=data;
+//                Log.e("LLL", "chenggong--requestYiyuan->" + UserMsg.getYiyuan());
+                this.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (wuiaoYiyuanBean.yiyaunBeanList!=null&&wuiaoYiyuanBean.yiyaunBeanList.size()>0){
+                            ((MainActivity) getContext()).hideProgressDailogView();
+                            mEventManager.notifyObservers(EventStatus.hospitalData, wuiaoYiyuanBean);
+                            LoginView.this.setVisibility(View.GONE);
+//                        mEventManager.notifyObservers(EventStatus.logined,null);
+                            Toast.makeText(getContext(), "chengong -->", Toast.LENGTH_LONG);
+                        }
                     }
                 });
 //

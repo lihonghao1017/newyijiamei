@@ -13,6 +13,7 @@ import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.bean.RecycleMaterialDetails;
 import com.sucetech.yijiamei.bean.WuLiaoBean;
+import com.sucetech.yijiamei.bean.WuliaoType;
 import com.sucetech.yijiamei.manager.EventStatus;
 
 import org.json.JSONObject;
@@ -28,11 +29,12 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
     private TextView name, beishu, weight, ok, price, volume;
     private String weightStr="6.6";
     public float commitWeightStr;
-    public WuLiaoBean wuLiaoBean;
+    public WuliaoType wuLiaoBean;
     private SuggistPopView mSuggistPopView;
-    private List<WuLiaoBean> datas;
+//    private List<WuLiaoBean> datas;
     public RecycleMaterialDetails recycleMaterialDetails;
     public boolean isOK;
+    private List<WuliaoType> wuliaoTypes;
 
     public WuliaoItemView(Context context, ViewGroup ParentView) {
         super(context, ParentView);
@@ -44,9 +46,9 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
             case weight:
                 weightStr = (String) obj;
                 break;
-            case wuliaoList:
-                datas.clear();
-                datas.addAll((List<WuLiaoBean>) obj);
+            case  wuliaoType:
+                wuliaoTypes.clear();
+                wuliaoTypes.addAll((List<WuliaoType>) obj);
                 break;
         }
     }
@@ -63,14 +65,7 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
         volume = (TextView) v.findViewById(R.id.volume);
         ok = (TextView) v.findViewById(R.id.ok);
         ok.setOnClickListener(this);
-        datas = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            WuLiaoBean wuLiaoBean = new WuLiaoBean();
-            wuLiaoBean.name = "塑料" + i;
-            wuLiaoBean.index = i;
-            datas.add(wuLiaoBean);
-        }
-        mSuggistPopView = new SuggistPopView(getContext(), datas, this);
+        mSuggistPopView = new SuggistPopView(getContext(), wuliaoTypes, this);
         mSuggistPopView.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -125,8 +120,9 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
     @Override
     public void onSuggistItemClick(int position, String str) {
         name.setText(str);
-        recycleMaterialDetails.type =  position;
-        wuLiaoBean = datas.get(position);
+        recycleMaterialDetails.type =  wuliaoTypes.get(position).orgId;
+        recycleMaterialDetails.orgId=wuliaoTypes.get(position).orgId;
+        wuLiaoBean = wuliaoTypes.get(position);
         mSuggistPopView.dismiss();
     }
 

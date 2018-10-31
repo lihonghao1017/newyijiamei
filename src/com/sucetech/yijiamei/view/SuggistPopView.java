@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.bean.WuLiaoBean;
+import com.sucetech.yijiamei.bean.WuliaoType;
 
 import java.util.List;
 
@@ -24,11 +25,11 @@ import java.util.List;
 public class SuggistPopView extends PopupWindow {
     private LayoutInflater inflater;
     private GridView mListView;
-    private List<WuLiaoBean> list;
+    private List<WuliaoType> list;
     private MyAdapter mAdapter;
     private OnSuggistItemClick clickListener;
 
-    public SuggistPopView(Context context, List<WuLiaoBean> list, OnSuggistItemClick clickListener) {
+    public SuggistPopView(Context context, List<WuliaoType> list, OnSuggistItemClick clickListener) {
         super(context);
         inflater = LayoutInflater.from(context);
         this.list=list;

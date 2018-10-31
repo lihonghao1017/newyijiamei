@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.bean.RecycleMaterialDetails;
+import com.sucetech.yijiamei.bean.WuliaoType;
 import com.sucetech.yijiamei.bean.yiyaunBean;
 import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
@@ -27,6 +28,7 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
     private LinearLayout wuliaoContent;
     private TextView title;
     private yiyaunBean yiyaunBean;
+    private List<WuliaoType> wuliaoTypes;
 
     public AddMaterielView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,6 +44,8 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
             this.setVisibility(View.VISIBLE);
         }else if(status == EventStatus.commitDataOk){
             this.setVisibility(View.GONE);
+        }else if(status== EventStatus.wuliaoType){
+            wuliaoTypes= (List<WuliaoType>) obj;
         }
     }
 
@@ -81,6 +85,7 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
 
         }else if(view.getId() == R.id.addLayout){
             wuliaoContent.addView(new MaterielItemView(getContext(), wuliaoContent));
+            EventManager.getEventManager().notifyObservers(EventStatus.wuliaoType, wuliaoTypes);
         }
 
     }

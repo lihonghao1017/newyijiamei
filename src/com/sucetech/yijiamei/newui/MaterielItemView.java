@@ -13,6 +13,7 @@ import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.bean.RecycleMaterialDetails;
 import com.sucetech.yijiamei.bean.WuLiaoBean;
+import com.sucetech.yijiamei.bean.WuliaoType;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.view.BaseView;
 import com.sucetech.yijiamei.view.SuggistPopView;
@@ -29,11 +30,11 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
     private TextView weidth, type, price,beishu;
     private String weight;
     private SuggistPopView mSuggistPopView;
-    private List<WuLiaoBean> datas;
+//    private List<WuLiaoBean> datas;
     private boolean isCreatNextItem;
     public RecycleMaterialDetails recycleMaterialDetails;
     private boolean isWeightOK;
-
+    private List<WuliaoType> wuliaoTypes;
     public MaterielItemView(Context context, ViewGroup ParentView) {
         super(context, ParentView);
     }
@@ -45,6 +46,17 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
             if (weight!=null&&!weight.equals("")&&!isWeightOK) {
                 weidth.setText(weight);
                 isWeightOK=true;
+            }
+        }else if(status== EventStatus.wuliaoType){
+            wuliaoTypes= (List<WuliaoType>) obj;
+            if (mSuggistPopView==null){
+                mSuggistPopView = new SuggistPopView(getContext(), wuliaoTypes, this);
+                mSuggistPopView.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+
+                    }
+                });
             }
         }
     }
@@ -64,20 +76,14 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
         delete.setOnClickListener(this);
         updata.setOnClickListener(this);
         type.setOnClickListener(this);
-        datas = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            WuLiaoBean wuLiaoBean = new WuLiaoBean();
-            wuLiaoBean.name = "塑料" + i;
-            wuLiaoBean.index = i;
-            datas.add(wuLiaoBean);
-        }
-        mSuggistPopView = new SuggistPopView(getContext(), datas, this);
-        mSuggistPopView.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
+//        datas = new ArrayList<>();
+//        for (int i = 0; i < 6; i++) {
+//            WuLiaoBean wuLiaoBean = new WuLiaoBean();
+//            wuLiaoBean.name = "塑料" + i;
+//            wuLiaoBean.index = i;
+//            datas.add(wuLiaoBean);
+//        }
 
-            }
-        });
         recycleMaterialDetails = new RecycleMaterialDetails();
     }
 
@@ -110,8 +116,9 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
     @Override
     public void onSuggistItemClick(int position, String str) {
         type.setText(str);
-        recycleMaterialDetails.typeName=str;
-        recycleMaterialDetails.type = position;
+        recycleMaterialDetails.type =  wuliaoTypes.get(position).orgId;
+        recycleMaterialDetails.orgId=wuliaoTypes.get(position).orgId;
+        recycleMaterialDetails.typeName=wuliaoTypes.get(position).name;
         mSuggistPopView.dismiss();
 //        if (!isCreatNextItem && !weidth.getText().toString().equals("") && weidth.getText().toString() != null) {
 //            prentView.addView(new MaterielItemView(getContext(), prentView));

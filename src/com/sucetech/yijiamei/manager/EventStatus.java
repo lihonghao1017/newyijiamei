@@ -17,5 +17,6 @@ public enum EventStatus {
     showNoOKIemt,
     commitData,
     commitDataOk,
+    wuliaoType,
 }
 
