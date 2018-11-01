@@ -1,6 +1,8 @@
 package com.sucetech.yijiamei.view;
 
 import android.content.Context;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +38,7 @@ import okhttp3.Response;
 
 public class LoginView extends BaseView implements View.OnClickListener {
     private EditText user, pwd;
-    private View commit;
+    private View commit,pwdEyeIcon;
     private WuiaoYiyuanBean wuiaoYiyuanBean;
 
     public LoginView(Context context, AttributeSet attrs) {
@@ -60,6 +62,8 @@ public class LoginView extends BaseView implements View.OnClickListener {
         commit = v.findViewById(R.id.commit);
         commit.setOnClickListener(this);
         this.addView(v, -1, -1);
+        pwdEyeIcon= v.findViewById(R.id.pwdEyeIcon);
+        pwdEyeIcon.setOnClickListener(this);
         user.setText(UserMsg.getUserName());
         pwd.setText(UserMsg.getPwd());
         wuiaoYiyuanBean=new WuiaoYiyuanBean();
@@ -77,7 +81,13 @@ public class LoginView extends BaseView implements View.OnClickListener {
                     requestLoing2();
                 }
             });
-
+        }else if(v.getId() == R.id.pwdEyeIcon){
+            pwdEyeIcon.setSelected(!pwdEyeIcon.isSelected());
+            if(pwdEyeIcon.isSelected()) {
+                pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                pwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
         }
     }
 

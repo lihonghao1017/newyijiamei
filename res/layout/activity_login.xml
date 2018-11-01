@@ -75,10 +75,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="19dp"
             android:layout_toRightOf="@id/pwdIcon"
+            android:inputType="textPassword"
             android:background="@android:color/transparent"
             android:hint="密码"
             android:textColor="@android:color/black"
             android:textSize="23dp" />
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/pwdEyeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/eye_style" />
 
         <View
             android:layout_width="match_parent"
