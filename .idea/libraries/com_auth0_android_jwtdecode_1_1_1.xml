@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.auth0.android:jwtdecode-1.1.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jwtdecode-1.1.1.aar/942f99191c318750200062d0230989a3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jwtdecode-1.1.1.aar/942f99191c318750200062d0230989a3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jwtdecode-1.1.1.aar/98d89af5bd64ae0cf50d1f51c6503c72/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jwtdecode-1.1.1.aar/98d89af5bd64ae0cf50d1f51c6503c72/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

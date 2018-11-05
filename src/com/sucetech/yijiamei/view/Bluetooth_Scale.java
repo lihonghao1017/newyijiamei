@@ -85,7 +85,7 @@ public class Bluetooth_Scale {
 
 
 
-    public synchronized void connect(BluetoothDevice device) {
+    public synchronized boolean connect(BluetoothDevice device) {
     	if (D) Log.d(TAG, "connect to: " + device);
 
         // Cancel any thread attempting to make a connection
@@ -106,8 +106,13 @@ public class Bluetooth_Scale {
         	
         // Start the thread to connect with the given device
         mConnectThread = new ConnectThread(device);
-        mConnectThread.start();
-        setState(STATE_CONNECTING);
+        if(mConnectThread.mmSocket!=null){
+            mConnectThread.start();
+            setState(STATE_CONNECTING);
+            return true;
+        }else{
+            return false;
+        }
     }
     
 
@@ -214,7 +219,7 @@ public class Bluetooth_Scale {
      * succeeds or fails.
      */
     private class ConnectThread extends Thread {
-        private final BluetoothSocket mmSocket;
+        public final BluetoothSocket mmSocket;
         private final BluetoothDevice mmDevice;
         private String mSocketType;
 
@@ -226,7 +231,6 @@ public class Bluetooth_Scale {
             // given BluetoothDevice
             try {
                 tmp = device.createRfcommSocketToServiceRecord(MY_UUID_SECURE);
-                
             } catch (IOException e) {
             		Log.e(TAG, "Socket Type: " + mSocketType + "create() failed", e);
             }

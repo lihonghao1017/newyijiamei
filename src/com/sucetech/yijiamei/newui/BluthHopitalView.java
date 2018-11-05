@@ -235,7 +235,12 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener, 
             try {
                 device = mBluetoothAdapter.getRemoteDevice(bluth);
                 if (device != null) {
-                    mBl_Scale.connect(device);
+                    if(!mBl_Scale.connect(device)){
+                        Message message = Message.obtain();
+                        message.what = 3;
+                        message.obj = bluth;
+                        mHandler.sendMessageDelayed(message, 1000);
+                    }
                 }
             } catch (Exception e) {
                 Toast.makeText(getContext(), "二维码格式异常-->" + bluth, Toast.LENGTH_SHORT).show();
