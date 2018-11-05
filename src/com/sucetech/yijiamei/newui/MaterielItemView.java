@@ -68,6 +68,7 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
         delete = v.findViewById(R.id.delete);
         updata = v.findViewById(R.id.updata);
         weidth =  v.findViewById(R.id.weidth);
+        weidth.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         beishu=v.findViewById(R.id.beishu);
         beishu.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         type =  v.findViewById(R.id.type);
@@ -116,7 +117,7 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
     @Override
     public void onSuggistItemClick(int position, String str) {
         type.setText(str);
-        recycleMaterialDetails.type =  wuliaoTypes.get(position).orgId;
+        recycleMaterialDetails.type =  wuliaoTypes.get(position).id;
         recycleMaterialDetails.orgId=wuliaoTypes.get(position).orgId;
         recycleMaterialDetails.typeName=wuliaoTypes.get(position).name;
         mSuggistPopView.dismiss();
@@ -149,8 +150,9 @@ public class MaterielItemView extends BaseView implements View.OnClickListener, 
         }
         recycleMaterialDetails.weight=www;
         if (price.getText().toString() != null && !price.getText().toString().equals("")) {
-            recycleMaterialDetails.price=price.getText().toString();
+            recycleMaterialDetails.unitPrice=price.getText().toString();
         }
+
         return recycleMaterialDetails;
     }
 }

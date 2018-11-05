@@ -30,7 +30,7 @@
             android:textSize="32dp" />
 
         <com.mapbar.scale.ScaleLinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="206dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="10dp"
@@ -38,16 +38,19 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.mapbar.scale.ScaleTextView
+            <com.mapbar.scale.ScaleEditText
                 android:id="@+id/weidth"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:digits="1234567890."
                 android:textColor="#C30000"
                 android:textSize="44dp" />
 
             <com.mapbar.scale.ScaleTextView
                 android:id="@+id/weidthLine"
-                android:layout_width="206dp"
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
                 android:background="#DBDBDB" />
@@ -59,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="kg"
+            android:text="KG"
             android:textColor="#4D4D4D"
             android:textSize="32dp" />
 

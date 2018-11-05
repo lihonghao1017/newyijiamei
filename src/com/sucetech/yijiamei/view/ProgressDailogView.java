@@ -42,6 +42,12 @@ public class ProgressDailogView extends LinearLayout {
         desTv=(TextView)v.findViewById(R.id.dialog_content_tv);
         this.addView(v,new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
+        v.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
     }
     public void setDes(String des){
         desTv.setText(des);

@@ -104,9 +104,9 @@ public class WuliaoItemView extends BaseView implements View.OnClickListener, Su
 //                    recycleMaterialDetails.volume = volume.getText().toString();
                     recycleMaterialDetails.weight = www;
                     if (price.getText()!=null&&!price.getText().toString().equals("")){
-                        recycleMaterialDetails.price=price.getText().toString();
+                        recycleMaterialDetails.unitPrice=price.getText().toString();
                     }else{
-                        recycleMaterialDetails.price="0";
+                        recycleMaterialDetails.unitPrice="0";
                     }
                 }
                 break;

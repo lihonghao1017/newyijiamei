@@ -37,10 +37,10 @@ public class RecoveryMaterirViewItem extends BaseView implements View.OnClickLis
             RecycleMaterialDetails item = (RecycleMaterialDetails) obj;
             weidth.setText(item.weight + "");
             type.setText(item.typeName + "");
-            if(item.price==null||item.price.equals("")){
+            if(item.unitPrice==null||item.unitPrice.equals("")){
                 price.setText("");
             }else{
-                price.setText(item.price + "");
+                price.setText(item.unitPrice + "");
             }
             beishu.setText(item.multiple + "");
         }

@@ -110,6 +110,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 recycleMaterialDto.material.licenseNumber = editText.getText().toString();
                 final FormImage formImage = (FormImage) listenImg.getTag();
                 if (formImage != null) {
+                    ((MainActivity)getContext()).showProgressDailogView("提交中...");
                     TaskManager.getInstance().addTask(new Runnable() {
                         @Override
                         public void run() {
@@ -176,6 +177,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
                     public void run() {
                         EventManager.getEventManager().notifyObservers(EventStatus.commitDataOk,null);
                         Toast.makeText(getContext(), "提交成功", Toast.LENGTH_LONG).show();
+                        ((MainActivity)getContext()).hideProgressDailogView();
                     }
                 });
                 Log.e("LLL", "isSuccessful");
@@ -183,6 +185,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 this.post(new Runnable() {
                     @Override
                     public void run() {
+                        ((MainActivity)getContext()).hideProgressDailogView();
                         Toast.makeText(getContext(), "提交失败", Toast.LENGTH_LONG).show();
                     }
                 });

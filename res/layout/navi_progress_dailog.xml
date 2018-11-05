@@ -33,7 +33,7 @@
             android:singleLine="true"
             android:text="加载中..."
             android:textColor="@android:color/white"
-            android:textSize="14dp" />
+            android:textSize="28dp" />
     </com.mapbar.scale.ScaleLinearLayout>
 
 </com.mapbar.scale.ScaleRelativeLayout>

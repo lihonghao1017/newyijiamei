@@ -9,6 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/wuliao_bj"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:gravity="center"
         android:textColor="#424242"
         android:textSize="25dp" />
