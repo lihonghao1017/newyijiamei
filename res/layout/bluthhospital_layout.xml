@@ -127,22 +127,53 @@
             android:id="@+id/hospitalList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/white"
             android:divider="#07923A"
             android:dividerHeight="1dp"
-            android:background="@android:color/white"
-            android:listSelector="@null"
-             />
+            android:listSelector="@null" />
 
-        <ListView
-            android:id="@+id/boluthList"
+        <com.mapbar.scale.ScaleRelativeLayout
+            android:id="@+id/boluthListLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="#07923A"
-            android:dividerHeight="1dp"
-            android:background="@android:color/white"
-            android:listSelector="@null"
-            android:visibility="gone" />
-    </com.mapbar.scale.ScaleRelativeLayout>
+            android:visibility="gone"
+            android:layout_height="match_parent">
 
+            <com.mapbar.scale.ScaleLinearLayout
+                android:id="@+id/boluthListUpdataLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="#707070"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.mapbar.scale.ScaleImageView
+                    android:id="@+id/bluthUpdata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bluthupdata" />
+                <com.mapbar.scale.ScaleTextView
+                    android:id="@+id/bluthUpdataStr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="刷新"
+                    android:textColor="@color/baseColor"
+                    android:textSize="26dp"
+                    />
+
+            </com.mapbar.scale.ScaleLinearLayout>
+
+            <ListView
+                android:id="@+id/boluthList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/boluthListUpdataLayout"
+                android:background="@android:color/white"
+                android:divider="#07923A"
+                android:dividerHeight="1dp"
+                android:listSelector="@null"
+              />
+        </com.mapbar.scale.ScaleRelativeLayout>
+    </com.mapbar.scale.ScaleRelativeLayout>
 
 </com.mapbar.scale.ScaleLinearLayout>
