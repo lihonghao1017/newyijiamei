@@ -128,20 +128,24 @@ public class LoginView extends BaseView implements View.OnClickListener {
             } else {
                 Log.e("LLL", "shibai--->");
 
-                this.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((MainActivity) getContext()).hideProgressDailogView();
-                        Toast.makeText(getContext(), "chengong -->", Toast.LENGTH_LONG);
-                    }
-                });
+                loginFail();
 //                Toast.makeText(getContext(),"shibai -->"+response.message(),Toast.LENGTH_LONG);
                 throw new IOException("Unexpected code " + response);
             }
         } catch (IOException e) {
             e.printStackTrace();
+            loginFail();
         }
         return null;
+    }
+    private void loginFail(){
+        this.post(new Runnable() {
+            @Override
+            public void run() {
+                ((MainActivity) getContext()).hideProgressDailogView();
+                Toast.makeText(getContext(), "登陆失败，请检查用户名或密码", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void requestYiyuan() {
