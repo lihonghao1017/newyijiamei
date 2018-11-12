@@ -3,6 +3,8 @@ package com.sucetech.yijiamei;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,6 +32,7 @@ import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
 import com.sucetech.yijiamei.newui.BluthHopitalView;
 import com.sucetech.yijiamei.newui.CommitView;
+import com.sucetech.yijiamei.newui.MakeSureDialog;
 import com.sucetech.yijiamei.utils.BitmapUtils;
 import com.sucetech.yijiamei.utils.PhotoUtils;
 import com.sucetech.yijiamei.view.ProgressDailogView;
@@ -464,4 +468,27 @@ public class MainActivity extends Activity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+            showExit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    private void showExit(){
+        MakeSureDialog dialog = new MakeSureDialog();
+//        dialog.setContent("确认删除吗？");
+        dialog.setDialogClickListener(new MakeSureDialog.onDialogClickListener() {
+            @Override
+            public void onSureClick() {
+                finish();
+            }
+
+            @Override
+            public void onCancelClick() {
+            }
+        });
+        dialog.show(getFragmentManager(),"");
+    }
 }

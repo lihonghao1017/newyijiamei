@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mapbar.scale.ScaleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.mapbar.scale.ScaleTextView
+        android:id="@+id/tv_dialog_make_sure_content"
+        android:layout_width="400dp"
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:text="您确定要退出医家美APP吗？"
+        android:textColor="@android:color/black" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/baseColor" />
+
+    <com.mapbar.scale.ScaleLinearLayout
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/tv_sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:text="确定"
+            android:textColor="@android:color/black" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/baseColor" />
+
+        <com.mapbar.scale.ScaleTextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@android:color/black" />
+    </com.mapbar.scale.ScaleLinearLayout>
+</com.mapbar.scale.ScaleLinearLayout>
