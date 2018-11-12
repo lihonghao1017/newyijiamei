@@ -1,6 +1,5 @@
 package com.sucetech.yijiamei.bean;
 
-import java.time.LocalDateTime;
 
 
 public class RecycleMaterial {
@@ -28,10 +27,10 @@ public class RecycleMaterial {
      */
     public Integer recycleUserId;
 
-    /**
-     * 回收时间,可以不传
-     */
-    public LocalDateTime dateTime;
+//    /**
+//     * 回收时间,可以不传
+//     */
+//    public LocalDateTime dateTime;
 
     /**
      * 单价
