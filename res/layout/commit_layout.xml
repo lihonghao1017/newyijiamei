@@ -77,12 +77,42 @@
         android:textColor="@android:color/white"
         android:textSize="24dp" />
 
+
+
+
+    <com.mapbar.scale.ScaleRelativeLayout
+        android:id="@+id/listenLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputnubmerLayout"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shouju_bj"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/listenImg"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:layout_height="match_parent" />
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/img03delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp"
+            android:src="@drawable/delete"
+            android:visibility="gone" />
+    </com.mapbar.scale.ScaleRelativeLayout>
+
+
     <com.mapbar.scale.ScaleLinearLayout
         android:id="@+id/wuliaoContent"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@id/inputnubmerLayout"
-        android:gravity="bottom"
+        android:layout_height="match_parent"
+        android:layout_below="@id/listenLayout"
+        android:gravity="center"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
         android:paddingLeft="30dp">
@@ -136,32 +166,5 @@
 
 
     </com.mapbar.scale.ScaleLinearLayout>
-
-
-    <com.mapbar.scale.ScaleRelativeLayout
-        android:id="@+id/listenLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/wuliaoContent"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/shouju_bj"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <com.mapbar.scale.ScaleImageView
-            android:id="@+id/listenImg"
-            android:layout_width="match_parent"
-            android:scaleType="fitXY"
-            android:layout_height="match_parent" />
-        <com.mapbar.scale.ScaleImageView
-            android:id="@+id/img03delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:paddingRight="4dp"
-            android:paddingTop="4dp"
-            android:src="@drawable/delete"
-            android:visibility="gone" />
-    </com.mapbar.scale.ScaleRelativeLayout>
 </com.mapbar.scale.ScaleRelativeLayout>
 
