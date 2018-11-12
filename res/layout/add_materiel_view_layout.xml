@@ -12,9 +12,12 @@
 
         <com.mapbar.scale.ScaleImageView
             android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_width="44dp"
+            android:layout_height="60dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:src="@drawable/back" />
 
         <com.mapbar.scale.ScaleTextView
@@ -30,8 +33,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 

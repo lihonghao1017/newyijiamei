@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:visibility="gone"
             android:src="@drawable/usermsgicon" />
 
         <com.mapbar.scale.ScaleTextView
@@ -119,14 +120,14 @@
     <com.mapbar.scale.ScaleRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="35dp">
 
         <ListView
             android:id="@+id/hospitalList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:background="@android:color/white"
             android:divider="#07923A"
             android:dividerHeight="1dp"
@@ -135,15 +136,15 @@
         <com.mapbar.scale.ScaleRelativeLayout
             android:id="@+id/boluthListLayout"
             android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <com.mapbar.scale.ScaleLinearLayout
                 android:id="@+id/boluthListUpdataLayout"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignParentBottom="true"
-                android:background="#707070"
+                android:background="#FFD700"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -151,15 +152,16 @@
                     android:id="@+id/bluthUpdata"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
                     android:src="@drawable/bluthupdata" />
+
                 <com.mapbar.scale.ScaleTextView
                     android:id="@+id/bluthUpdataStr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="刷新"
                     android:textColor="@color/baseColor"
-                    android:textSize="26dp"
-                    />
+                    android:textSize="26dp" />
 
             </com.mapbar.scale.ScaleLinearLayout>
 
@@ -168,11 +170,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/boluthListUpdataLayout"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:background="@android:color/white"
                 android:divider="#07923A"
                 android:dividerHeight="1dp"
-                android:listSelector="@null"
-              />
+                android:listSelector="@null" />
         </com.mapbar.scale.ScaleRelativeLayout>
     </com.mapbar.scale.ScaleRelativeLayout>
 
