@@ -118,7 +118,8 @@ public class RecordButton extends ScaleImageView {
                 dialogTextTime.setVisibility(GONE);
 //			dialogImg.setImageResource(R.drawable.record_animate_01);
                 dialogImg.setImageResource(R.drawable.im_microphone);
-                dialogImgSize.setImageResource(R.drawable.chat_volume_00);
+//                dialogImgSize.setBackgroundResource(R.drawable.chat_volume_00);
+//                dialogImgSize.setImageResource(R.drawable.chat_volume_00);
 //			dialogTextView.setText("向上滑动可取消录音");
 //			this.setText("松开手指 完成录音");
                 dialogTextView.setText("上滑取消发送");
@@ -150,33 +151,33 @@ public class RecordButton extends ScaleImageView {
 
     // 录音Dialog图片随录音音量大小切换
     private void setDialogImage() {
-
+        Log.d("LLL", "setDialogImage: voiceValue-->"+voiceValue);
         if (voiceValue < 1000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_01);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_01);
         } else if (voiceValue > 1000.0 && voiceValue < 3000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_02);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_02);
         } else if (voiceValue > 3000.0 && voiceValue < 5000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_03);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_03);
         } else if (voiceValue > 5000.0 && voiceValue < 7000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_04);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_04);
         } else if (voiceValue > 7000.0 && voiceValue < 9000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_05);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_05);
         } else if (voiceValue > 11000.0 && voiceValue < 13000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_06);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_06);
         } else if (voiceValue > 13000.0 && voiceValue < 15000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_07);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_07);
         } else if (voiceValue > 15000.0 && voiceValue < 17000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_08);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_08);
         } else if (voiceValue > 17000.0 && voiceValue < 19000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_09);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_09);
         } else if (voiceValue > 19000.0 && voiceValue < 20000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_10);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_10);
         } else if (voiceValue > 20000.0 && voiceValue < 22000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_11);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_11);
         } else if (voiceValue > 22000.0) {
-            dialogImgSize.setImageResource(R.drawable.chat_volume_12);
+            dialogImgSize.setBackgroundResource(R.drawable.chat_volume_12);
         }
-
+        dialogImgSize.requestLayout();
 
 //		if (voiceValue < 600.0) {
 //			dialogImg.setImageResource(R.drawable.record_animate_01);

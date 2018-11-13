@@ -171,6 +171,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/tupianLayout"
         android:gravity="center"
+        android:layout_marginTop="260dp"
         android:orientation="horizontal"
         >
         <com.mapbar.scale.ScaleLinearLayout
