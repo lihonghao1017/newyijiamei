@@ -254,7 +254,7 @@ public class MainActivity extends Activity {
             }   else if (requestCode == CODE_CAMERA_REQUEST) {
 //                Bitmap bitmap = PhotoUtils.getBitmapFromUri(imageUri, this);
                 String newFile = fileUri.getParent() + "yijiamei_" + fileUri.getName();
-                Bitmap bitmap = BitmapUtils.getSmallBitmap(fileUri.getPath(), 480, 480, new File(newFile));
+                Bitmap bitmap = BitmapUtils.getSmallBitmap(fileUri.getPath(), 680, 680, new File(newFile));
 //                img_src.setImageBitmap(smallBitmap);
 //                BitmapFactory.Options options = new BitmapFactory.Options();
 //                options.inSampleSize = 32;

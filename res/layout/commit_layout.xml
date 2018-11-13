@@ -82,19 +82,18 @@
 
     <com.mapbar.scale.ScaleRelativeLayout
         android:id="@+id/listenLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="470dp"
+        android:layout_height="353dp"
         android:layout_below="@id/inputnubmerLayout"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/shouju_bj"
         android:gravity="center"
         android:orientation="vertical">
 
         <com.mapbar.scale.ScaleImageView
             android:id="@+id/listenImg"
             android:layout_width="match_parent"
-            android:scaleType="fitXY"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:src="@drawable/shouju_bj"/>
         <com.mapbar.scale.ScaleImageView
             android:id="@+id/img03delete"
             android:layout_width="wrap_content"
