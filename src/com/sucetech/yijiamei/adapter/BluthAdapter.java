@@ -50,7 +50,7 @@ public class BluthAdapter extends BaseAdapter{
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.name.setText(deviceList.get(position).getName() + "--" + deviceList.get(position).getAddress());
+        holder.name.setText(deviceList.get(position).getName() );
         return convertView;
     }
     class ViewHolder{
