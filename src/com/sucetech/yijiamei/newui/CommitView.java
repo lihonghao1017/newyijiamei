@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.sucetech.yijiamei.Configs;
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.UserMsg;
@@ -164,7 +165,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
             }
             builder.addFormDataPart("licenses", lictence.getName(),
                     RequestBody.create(MediaType.get("image/jpg"), FileUtils.getFile(license)));
-            String url = "http://www.yijiamei.net/api/v1/yijiamei/recycle";
+            String url = Configs.baseUrl+"/api/v1/yijiamei/recycle";
             Request request = new Request.Builder()
                     .url(url)
                     .header("Authorization", UserMsg.getToken())

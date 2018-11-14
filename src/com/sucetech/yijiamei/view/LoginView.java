@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sucetech.yijiamei.Configs;
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.UserMsg;
@@ -37,7 +38,7 @@ import okhttp3.Response;
  */
 
 public class LoginView extends BaseView implements View.OnClickListener {
-    private EditText user, pwd;
+    private EditText user, pwd,baseUrl;
     private View commit,pwdEyeIcon;
     private WuiaoYiyuanBean wuiaoYiyuanBean;
 
@@ -59,6 +60,7 @@ public class LoginView extends BaseView implements View.OnClickListener {
         View v = LayoutInflater.from(context).inflate(R.layout.activity_login, null);
         user = (EditText) v.findViewById(R.id.username);
         pwd = (EditText) v.findViewById(R.id.pwd);
+        baseUrl=(EditText)v.findViewById(R.id.baseUrl);
         commit = v.findViewById(R.id.commit);
         commit.setOnClickListener(this);
         this.addView(v, -1, -1);
@@ -75,6 +77,9 @@ public class LoginView extends BaseView implements View.OnClickListener {
             ((MainActivity) getContext()).showProgressDailogView("登陆中...");
             UserMsg.saveUserName(user.getText().toString());
             UserMsg.savePwd(pwd.getText().toString());
+            if(baseUrl.getText()!=null&&!baseUrl.getText().toString().equals("")&&baseUrl.getText().toString().contains("http://")){
+                Configs.baseUrl=baseUrl.getText().toString();
+            }
             TaskManager.getInstance().addTask(new Runnable() {
                 @Override
                 public void run() {
@@ -105,7 +110,7 @@ public class LoginView extends BaseView implements View.OnClickListener {
         }
         RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
         Request request = new Request.Builder()
-                .url("http://www.yijiamei.net/api/v1/yijiamei/login")
+                .url(Configs.baseUrl+"/api/v1/yijiamei/login")
                 .post(body)
                 .build();
         try {
@@ -155,7 +160,7 @@ public class LoginView extends BaseView implements View.OnClickListener {
         Request request = new Request.Builder()
                 .header("Authorization", UserMsg.getToken())
                 .addHeader("Accept", "application/json")
-                .url("http://www.yijiamei.net/api/v1/yijiamei/medical/")
+                .url(Configs.baseUrl+"/api/v1/yijiamei/medical/")
                 .get()
                 .build();
         try {
@@ -202,7 +207,7 @@ public class LoginView extends BaseView implements View.OnClickListener {
         Request request = new Request.Builder()
                 .header("Authorization", UserMsg.getToken())
                 .addHeader("Accept", "application/json")
-                .url("http://www.yijiamei.net/api/v1/yijiamei/materialType")
+                .url(Configs.baseUrl+"/api/v1/yijiamei/materialType")
                 .get()
                 .build();
         try {

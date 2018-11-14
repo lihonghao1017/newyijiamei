@@ -110,6 +110,18 @@
         android:text="登陆"
         android:textColor="#ffffff"
         android:textSize="25dp" />
-
+    <com.mapbar.scale.ScaleEditText
+        android:id="@+id/baseUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="19dp"
+        android:layout_toRightOf="@id/pwdIcon"
+        android:inputType="textPassword"
+        android:background="@android:color/transparent"
+        android:hint="密码"
+        android:textColor="@android:color/black"
+        android:textSize="23dp" />
 
 </com.mapbar.scale.ScaleRelativeLayout>
