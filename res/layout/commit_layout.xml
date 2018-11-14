@@ -65,21 +65,6 @@
             android:background="#BDBDBD" />
     </com.mapbar.scale.ScaleRelativeLayout>
 
-
-    <com.mapbar.scale.ScaleTextView
-        android:id="@+id/nextAction"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/baseColor"
-        android:gravity="center"
-        android:text="提交"
-        android:textColor="@android:color/white"
-        android:textSize="24dp" />
-
-
-
-
     <com.mapbar.scale.ScaleRelativeLayout
         android:id="@+id/listenLayout"
         android:layout_width="470dp"
@@ -165,5 +150,15 @@
 
 
     </com.mapbar.scale.ScaleLinearLayout>
+    <com.mapbar.scale.ScaleTextView
+        android:id="@+id/nextAction"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/baseColor"
+        android:gravity="center"
+        android:text="提交"
+        android:textColor="@android:color/white"
+        android:textSize="24dp" />
 </com.mapbar.scale.ScaleRelativeLayout>
 

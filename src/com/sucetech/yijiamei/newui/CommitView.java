@@ -70,7 +70,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
             case commitDataOk:
                 this.setVisibility(View.GONE);
                 editText.setText("");
-                listenImg.setImageDrawable(null);
+                listenImg.setImageResource(R.drawable.shouju_bj);
                 break;
             case selectedHos:
                 yiyaunBean = (com.sucetech.yijiamei.bean.yiyaunBean) obj;
@@ -101,7 +101,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
             case R.id.back:
                 this.setVisibility(View.GONE);
                 editText.setText("");
-                listenImg.setImageDrawable(null);
+                listenImg.setImageResource(R.drawable.shouju_bj);
                 break;
             case R.id.clear:
                 editText.setText("");

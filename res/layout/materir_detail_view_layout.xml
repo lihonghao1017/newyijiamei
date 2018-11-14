@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:src="@drawable/nohegei_addcon" />
+                android:src="@drawable/nohegeicon" />
         </com.mapbar.scale.ScaleLinearLayout>
     </com.mapbar.scale.ScaleRelativeLayout>
 
