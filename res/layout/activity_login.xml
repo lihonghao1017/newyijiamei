@@ -119,6 +119,7 @@
         android:layout_marginLeft="19dp"
         android:layout_toRightOf="@id/pwdIcon"
         android:inputType="textPassword"
+        android:visibility="gone"
         android:background="@android:color/transparent"
         android:hint="密码"
         android:textColor="@android:color/black"

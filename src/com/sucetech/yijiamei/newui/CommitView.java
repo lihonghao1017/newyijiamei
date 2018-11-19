@@ -12,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sucetech.yijiamei.Configs;
 import com.sucetech.yijiamei.MainActivity;
 import com.sucetech.yijiamei.R;
 import com.sucetech.yijiamei.UserMsg;
 import com.sucetech.yijiamei.bean.CommitDataBean;
+import com.sucetech.yijiamei.bean.ErrorDetails;
 import com.sucetech.yijiamei.bean.FormImage;
 import com.sucetech.yijiamei.bean.RecycleMaterial;
 import com.sucetech.yijiamei.bean.RecycleMaterialDto;
@@ -31,6 +33,7 @@ import com.zxing.activity.CaptureActivity;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -44,7 +47,7 @@ import okhttp3.Response;
 
 public class CommitView extends BaseView implements View.OnClickListener {
     private EditText editText;
-    private ImageView paizhao,listenImg;
+    private ImageView paizhao, listenImg;
     private CommitDataBean commitDataBean;
     private RecycleMaterialDto recycleMaterialDto = new RecycleMaterialDto();
     private com.sucetech.yijiamei.bean.yiyaunBean yiyaunBean;
@@ -76,7 +79,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
             case selectedHos:
                 yiyaunBean = (com.sucetech.yijiamei.bean.yiyaunBean) obj;
                 recycleMaterialDto.material = new RecycleMaterial();
-                recycleMaterialDto.material.medicalId=yiyaunBean.id;
+                recycleMaterialDto.material.medicalId = yiyaunBean.id;
                 break;
         }
     }
@@ -91,7 +94,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
         v.findViewById(R.id.shoujupaizhaoLayout).setOnClickListener(this);
         v.findViewById(R.id.saoyisaoLayout).setOnClickListener(this);
         paizhao = v.findViewById(R.id.paizhao);
-        listenImg=v.findViewById(R.id.listenImg);
+        listenImg = v.findViewById(R.id.listenImg);
         editText = v.findViewById(R.id.inputET);
         editText.setInputType(EditorInfo.TYPE_CLASS_PHONE);
     }
@@ -111,7 +114,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 recycleMaterialDto.material.licenseNumber = editText.getText().toString();
                 final FormImage formImage = (FormImage) listenImg.getTag();
                 if (formImage != null) {
-                    ((MainActivity)getContext()).showProgressDailogView("提交中...");
+                    ((MainActivity) getContext()).showProgressDailogView("提交中...");
                     TaskManager.getInstance().addTask(new Runnable() {
                         @Override
                         public void run() {
@@ -131,8 +134,9 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 break;
         }
     }
-    public void setDanjuHao(String nub){
-        if (nub!=null&&!nub.equals("")){
+
+    public void setDanjuHao(String nub) {
+        if (nub != null && !nub.equals("")) {
             editText.setText(nub);
         }
     }
@@ -155,9 +159,9 @@ public class CommitView extends BaseView implements View.OnClickListener {
                     builder.addFormDataPart("faileds", "failedImg01.png",
                             RequestBody.create(MediaType.get("image/jpg"), FileUtils.getFile(commitDataBean.imgs.get(i).mFileName)));
                 }
-                if (commitDataBean.audioFile!=null){
-                    File audioFile=new File(commitDataBean.audioFile);
-                    if (audioFile.exists()){
+                if (commitDataBean.audioFile != null) {
+                    File audioFile = new File(commitDataBean.audioFile);
+                    if (audioFile.exists()) {
                         builder.addFormDataPart("audio", audioFile.getName(),
                                 RequestBody.create(MediaType.get("audio/amr"), FileUtils.getFile(commitDataBean.audioFile)));
                     }
@@ -165,20 +169,38 @@ public class CommitView extends BaseView implements View.OnClickListener {
             }
             builder.addFormDataPart("licenses", lictence.getName(),
                     RequestBody.create(MediaType.get("image/jpg"), FileUtils.getFile(license)));
-            String url = Configs.baseUrl+"/api/v1/yijiamei/recycle";
+            String url = Configs.baseUrl + "/api/v1/yijiamei/recycle";
             Request request = new Request.Builder()
                     .url(url)
                     .header("Authorization", UserMsg.getToken())
                     .post(builder.build())
                     .build();
             Response response = ((MainActivity) getContext()).client.newCall(request).execute();
+            try {
+                String ad = response.body().string();
+                if (ad != null) {
+                    ErrorDetails datae = new Gson().fromJson(ad, new TypeToken<ErrorDetails>() {
+                    }.getType());//把JSON字符串转为对象
+                    if (datae != null) {
+                        this.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((MainActivity) getContext()).hideProgressDailogView();
+                                Toast.makeText(getContext(), "提交失败,有未处理的任务!", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        return response;
+                    }
+                }
+            }catch(Exception e){
+            }
             if (response.isSuccessful()) {
                 this.post(new Runnable() {
                     @Override
                     public void run() {
-                        EventManager.getEventManager().notifyObservers(EventStatus.commitDataOk,null);
+                        EventManager.getEventManager().notifyObservers(EventStatus.commitDataOk, null);
                         Toast.makeText(getContext(), "提交成功", Toast.LENGTH_LONG).show();
-                        ((MainActivity)getContext()).hideProgressDailogView();
+                        ((MainActivity) getContext()).hideProgressDailogView();
                     }
                 });
                 Log.e("LLL", "isSuccessful");
@@ -186,7 +208,7 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 this.post(new Runnable() {
                     @Override
                     public void run() {
-                        ((MainActivity)getContext()).hideProgressDailogView();
+                        ((MainActivity) getContext()).hideProgressDailogView();
                         Toast.makeText(getContext(), "提交失败", Toast.LENGTH_LONG).show();
                     }
                 });
