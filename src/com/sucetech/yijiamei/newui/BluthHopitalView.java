@@ -229,7 +229,6 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener, 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getContext(), "kkkk", Toast.LENGTH_SHORT).show();
             }
 
         } else {

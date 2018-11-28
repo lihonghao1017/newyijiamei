@@ -49,15 +49,23 @@
             android:textColor="#B5B5B5"
             android:textSize="22dp" />
 
+
         <com.mapbar.scale.ScaleImageView
-            android:id="@+id/clear"
+            android:id="@+id/saoyisaoLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
+            android:src="@drawable/saoyisaoicon2" />
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/saoyisaoLayout"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/delete" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -96,34 +104,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/listenLayout"
-        android:gravity="center"
+        android:gravity="center_horizontal|bottom"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingLeft="30dp">
+        android:paddingBottom="70dp"
+        >
 
-        <com.mapbar.scale.ScaleLinearLayout
-            android:id="@+id/saoyisaoLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="100dp"
-            android:gravity="center"
-            android:orientation="vertical">
+        <!--   <com.mapbar.scale.ScaleLinearLayout
+               android:id="@+id/saoyisaoLayout"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginRight="100dp"
+               android:gravity="center"
+               android:orientation="vertical">
 
-            <com.mapbar.scale.ScaleImageView
-                android:id="@+id/saoyisao"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/saoyisaoicon" />
+               <com.mapbar.scale.ScaleImageView
+                   android:id="@+id/saoyisao"
+                   android:layout_width="60dp"
+                   android:layout_height="60dp"
+                   android:src="@drawable/saoyisaoicon" />
 
-            <com.mapbar.scale.ScaleTextView
-                android:id="@+id/saoyisaoStr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="扫描单据号"
-                android:textColor="@color/baseColor"
-                android:textSize="22dp" />
+               <com.mapbar.scale.ScaleTextView
+                   android:id="@+id/saoyisaoStr"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="扫描单据号"
+                   android:textColor="@color/baseColor"
+                   android:textSize="22dp" />
 
-        </com.mapbar.scale.ScaleLinearLayout>
+           </com.mapbar.scale.ScaleLinearLayout>-->
 
         <com.mapbar.scale.ScaleLinearLayout
             android:id="@+id/shoujupaizhaoLayout"
@@ -136,7 +144,7 @@
                 android:id="@+id/paizhao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/paizhaoicon" />
+                android:src="@drawable/zhaoxiangjiicon" />
 
             <com.mapbar.scale.ScaleTextView
                 android:id="@+id/paizhaoStr"
