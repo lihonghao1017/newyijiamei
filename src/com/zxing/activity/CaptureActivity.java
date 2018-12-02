@@ -18,6 +18,8 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -57,7 +59,13 @@ public class CaptureActivity extends Activity implements Callback {
 		cancelScanButton = (Button) this.findViewById(R.id.btn_cancel_scan);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
-	}
+		Window window = this.getWindow();
+		//取消状态栏透明
+		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		//添加Flag把状态栏设为可绘制模式
+		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+		//设置状态栏颜色
+		window.setStatusBarColor(0xff07923A);	}
 
 	@Override
 	protected void onResume() {
