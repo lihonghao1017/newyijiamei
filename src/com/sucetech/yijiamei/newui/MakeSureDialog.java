@@ -19,7 +19,7 @@ import com.sucetech.yijiamei.R;
 public class MakeSureDialog extends DialogFragment {
     private View mView;
     private TextView mTvContent;
-    private String content = "您确认执行此操作吗？";
+    private String content = "是否退出软件？";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
