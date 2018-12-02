@@ -29,6 +29,15 @@
             android:text="添加不合格物料"
             android:textColor="@android:color/white"
             android:textSize="30dp" />
+
+        <com.mapbar.scale.ScaleImageView
+            android:id="@+id/paizhaoLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/zhaoxiangjiicon_top" />
     </com.mapbar.scale.ScaleRelativeLayout>
 
     <com.mapbar.scale.ScaleTextView
@@ -149,7 +158,7 @@
                     android:id="@+id/play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/soundicon"
+                    android:src="@drawable/voice04"
                     />
                 <com.mapbar.scale.ScaleTextView
                     android:id="@+id/end"
@@ -170,15 +179,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tupianLayout"
-        android:gravity="center"
-        android:layout_marginTop="260dp"
-        android:orientation="horizontal"
+        android:gravity="center_horizontal|bottom"
         >
         <com.mapbar.scale.ScaleLinearLayout
             android:id="@+id/yuyinLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="100dp"
+            android:layout_marginBottom="70dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -201,7 +208,7 @@
 
 
         </com.mapbar.scale.ScaleLinearLayout>
-        <com.mapbar.scale.ScaleLinearLayout
+       <!-- <com.mapbar.scale.ScaleLinearLayout
             android:id="@+id/paizhaoLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -223,7 +230,7 @@
                 android:textColor="@color/baseColor"
                 android:textSize="22dp" />
 
-        </com.mapbar.scale.ScaleLinearLayout>
+        </com.mapbar.scale.ScaleLinearLayout>-->
 
 
     </com.mapbar.scale.ScaleLinearLayout>

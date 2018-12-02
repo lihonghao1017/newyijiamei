@@ -37,7 +37,7 @@
             android:id="@+id/play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/soundicon"
+            android:src="@drawable/voice04"
             />
         <com.mapbar.scale.ScaleTextView
             android:id="@+id/end"

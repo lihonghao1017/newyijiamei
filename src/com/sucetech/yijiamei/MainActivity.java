@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 
     //    private ToastView toastView;
     TextView locationg;
-    private LocationService locationService;
+//    private LocationService locationService;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
          //设置状态栏颜色
          window.setStatusBarColor(0xff07923A);
     }
-    @Override
+  /*  @Override
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 //                }
 //            }
 //        });
-    }
+    }*/
     /*****
      *
      * 定位结果回调，重写onReceiveLocation方法，可以直接拷贝如下代码到自己工程中修改
@@ -282,13 +282,13 @@ public class MainActivity extends Activity {
         }
 
     }
-    @Override
+  /*  @Override
     protected void onStop() {
         // TODO Auto-generated method stub
         locationService.unregisterListener(mListener); //注销掉监听
         locationService.stop(); //停止定位服务
         super.onStop();
-    }
+    }*/
     @Override
     protected void onDestroy() {
         super.onDestroy();
