@@ -98,6 +98,9 @@ public class CommitView extends BaseView implements View.OnClickListener {
         editText = v.findViewById(R.id.inputET);
         editText.setInputType(EditorInfo.TYPE_CLASS_PHONE);
     }
+    public void onkeyDown(){
+        onClick(this.findViewById(R.id.back));
+    }
 
     @Override
     public void onClick(View v) {

@@ -60,6 +60,9 @@ public class AddMaterielView extends BaseView implements View.OnClickListener {
         v.findViewById(R.id.back).setOnClickListener(this);
         this.addView(v, -1, -1);
     }
+    public void onkeyDown(){
+        onClick(this.findViewById(R.id.back));
+    }
 
     @Override
     public void onClick(View view) {

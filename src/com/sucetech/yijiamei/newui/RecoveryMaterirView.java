@@ -50,7 +50,14 @@ public class RecoveryMaterirView extends BaseView implements View.OnClickListene
             eidt();
         }
     }
-
+    public void onkeyDown(){
+        if (noOKLayout.getVisibility()==View.VISIBLE){
+            noOKLayout.setVisibility(View.INVISIBLE);
+            noOKLayout.removeAllViews();
+        }else{
+            onClick(this.findViewById(R.id.back));
+        }
+    }
     @Override
     public void initView(Context context) {
         datas = new ArrayList<>();

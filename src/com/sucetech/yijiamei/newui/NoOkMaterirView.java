@@ -61,7 +61,9 @@ public class NoOkMaterirView extends BaseView implements View.OnClickListener {
                 break;
         }
     }
-
+    public void onkeyDown(){
+        onClick(this.findViewById(R.id.back));
+    }
     @Override
     public void initView(Context context) {
         View v = LayoutInflater.from(context).inflate(R.layout.no_ok_materir_layout, null);

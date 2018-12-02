@@ -30,11 +30,14 @@ import com.baidu.location.Poi;
 import com.sucetech.yijiamei.bean.FormImage;
 import com.sucetech.yijiamei.manager.EventManager;
 import com.sucetech.yijiamei.manager.EventStatus;
+import com.sucetech.yijiamei.newui.AddMaterielView;
 import com.sucetech.yijiamei.newui.BluthHopitalView;
 import com.sucetech.yijiamei.newui.CommitView;
 import com.sucetech.yijiamei.newui.MakeSureDialog;
+import com.sucetech.yijiamei.newui.RecoveryMaterirView;
 import com.sucetech.yijiamei.utils.BitmapUtils;
 import com.sucetech.yijiamei.utils.PhotoUtils;
+import com.sucetech.yijiamei.view.LoginView;
 import com.sucetech.yijiamei.view.ProgressDailogView;
 
 import java.io.File;
@@ -47,6 +50,9 @@ import okhttp3.OkHttpClient;
 public class MainActivity extends Activity {
     private CommitView mCommitView;
     public BluthHopitalView mConBluthView;
+    private LoginView loginView;
+    private AddMaterielView addMaterielView;
+    private RecoveryMaterirView recoveryMaterirView;
     private ProgressDailogView progressDailogView;
     private int REQUEST_CAMERA = 0x001;
     private File file;
@@ -78,6 +84,9 @@ public class MainActivity extends Activity {
         mConBluthView = (BluthHopitalView) findViewById(R.id.connectBloth);
         progressDailogView = (ProgressDailogView) findViewById(R.id.progressDailogView);
 //        toastView= (ToastView) findViewById(R.id.myToast);
+         loginView=(LoginView) findViewById(R.id.loginView);
+         addMaterielView=(AddMaterielView) findViewById(R.id.addMaterielView);;
+         recoveryMaterirView=(RecoveryMaterirView) findViewById(R.id.recoveryMaterirView);;
          locationg= (TextView) findViewById(R.id.locationg);
          mCommitView=findViewById(R.id.commitView);
 
@@ -471,7 +480,24 @@ public class MainActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode==KeyEvent.KEYCODE_BACK){
-            showExit();
+
+            if(mCommitView.getVisibility()==View.VISIBLE){
+                mCommitView.onkeyDown();
+                return true;
+            }
+            if (recoveryMaterirView.getVisibility()==View.VISIBLE){
+                recoveryMaterirView.onkeyDown();
+                return true;
+            }
+            if (addMaterielView.getVisibility()==View.VISIBLE){
+                addMaterielView.onkeyDown();
+                return true;
+            }
+            if (mConBluthView.getVisibility()==View.VISIBLE||loginView.getVisibility()==View.VISIBLE){
+                showExit();
+                return true;
+            }
+
             return true;
         }
         return super.onKeyDown(keyCode, event);
