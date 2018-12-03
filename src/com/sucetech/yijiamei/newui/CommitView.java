@@ -114,7 +114,14 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 editText.setText("");
                 break;
             case R.id.nextAction:
-                recycleMaterialDto.material.licenseNumber = editText.getText().toString();
+                if (editText.getText().toString()!=null&&!editText.getText().toString().equals("")){
+                    recycleMaterialDto.material.licenseNumber = editText.getText().toString();
+                }else{
+                    Toast.makeText(getContext(), "请填写收据号", Toast.LENGTH_LONG).show();
+                    editText.requestFocus();
+                }
+
+
                 final FormImage formImage = (FormImage) listenImg.getTag();
                 if (formImage != null) {
                     ((MainActivity) getContext()).showProgressDailogView("提交中...");
