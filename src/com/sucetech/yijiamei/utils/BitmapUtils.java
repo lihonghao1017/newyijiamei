@@ -2,6 +2,7 @@ package com.sucetech.yijiamei.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
@@ -42,14 +43,16 @@ public class BitmapUtils {
      * @return
      */
     public static Bitmap getSmallBitmap(String filePath, int reqWidth, int reqHeight, File imgPath) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;  //只返回图片的大小信息
-        BitmapFactory.decodeFile(filePath, options);
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+//        final BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;  //只返回图片的大小信息
+//        BitmapFactory.decodeFile(filePath, options);
+//        // Calculate inSampleSize
+//        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+//        // Decode bitmap with inSampleSize set
+//        options.inJustDecodeBounds = false;
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+
+        bitmap=zoomImg(bitmap,1280,720);
         Log.d("tag", "getSmallBitmap: 生成bitmap----"+filePath+"//"+bitmap);
         compressBmpToFile(bitmap,imgPath);
         return bitmap;
@@ -80,6 +83,20 @@ public class BitmapUtils {
         }
 
 
+    }
+    public static Bitmap zoomImg(Bitmap bm, int newWidth ,int newHeight){
+        // 获得图片的宽高
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        // 计算缩放比例
+//        float scaleWidth = ((float) newWidth) / width;
+//        float scaleHeight = ((float) newHeight) / height;
+        // 取得想要缩放的matrix参数
+        Matrix matrix = new Matrix();
+        matrix.postScale(0.5f, 0.5f);
+        // 得到新的图片
+        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+        return newbm;
     }
 
 }

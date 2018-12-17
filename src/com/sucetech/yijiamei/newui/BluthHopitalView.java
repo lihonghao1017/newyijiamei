@@ -384,6 +384,11 @@ public class BluthHopitalView extends BaseView implements View.OnClickListener, 
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {  //发现设备
                 BluetoothDevice btDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                if (btDevice.getName()!=null&&!btDevice.getName().equals("")){
+                   for (int i = 0; i <deviceList.size() ; i++) {
+                       if (deviceList.get(i).getName().equals(btDevice.getName())){
+                           return;
+                       }
+                   }
                    deviceList.add(btDevice);
                    bluthAdapter.notifyDataSetChanged();
                }

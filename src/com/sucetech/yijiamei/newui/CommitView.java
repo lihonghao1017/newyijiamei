@@ -75,6 +75,8 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 this.setVisibility(View.GONE);
                 editText.setText("");
                 listenImg.setImageResource(R.drawable.shouju_bj);
+                recycleMaterialDto.material.licenseNumber=null;
+                listenImg.setTag(null);
                 break;
             case selectedHos:
                 yiyaunBean = (com.sucetech.yijiamei.bean.yiyaunBean) obj;
@@ -109,6 +111,8 @@ public class CommitView extends BaseView implements View.OnClickListener {
                 this.setVisibility(View.GONE);
                 editText.setText("");
                 listenImg.setImageResource(R.drawable.shouju_bj);
+                recycleMaterialDto.material.licenseNumber=null;
+                listenImg.setTag(null);
                 break;
             case R.id.clear:
                 editText.setText("");
@@ -116,24 +120,32 @@ public class CommitView extends BaseView implements View.OnClickListener {
             case R.id.nextAction:
                 if (editText.getText().toString()!=null&&!editText.getText().toString().equals("")){
                     recycleMaterialDto.material.licenseNumber = editText.getText().toString();
-                }else{
-                    Toast.makeText(getContext(), "请填写收据号", Toast.LENGTH_LONG).show();
-                    editText.requestFocus();
                 }
+//                else{
+//                    Toast.makeText(getContext(), "请填写收据号", Toast.LENGTH_LONG).show();
+//                    editText.requestFocus();
+//                    return;
+//                }
 
 
                 final FormImage formImage = (FormImage) listenImg.getTag();
-                if (formImage != null) {
+                if(recycleMaterialDto.material.licenseNumber==null&&formImage==null){
+                    Toast.makeText(getContext(), "请填写收据号或者拍照收据", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+//                if (formImage != null) {
                     ((MainActivity) getContext()).showProgressDailogView("提交中...");
                     TaskManager.getInstance().addTask(new Runnable() {
                         @Override
                         public void run() {
-                            test(formImage.mFileName);
+                            test(formImage);
                         }
                     });
-                } else {
-                    Toast.makeText(getContext(), "请拍照收据", Toast.LENGTH_LONG).show();
-                }
+//                } else {
+//                    Toast.makeText(getContext(), "请拍照收据", Toast.LENGTH_LONG).show();
+//                }
                 break;
             case R.id.shoujupaizhaoLayout:
                 ((MainActivity) getContext()).requestPicture(R.id.shoujupaizhaoLayout);
@@ -151,14 +163,14 @@ public class CommitView extends BaseView implements View.OnClickListener {
         }
     }
 
-    public Response test(String license) {
+    public Response test(FormImage license) {
 
 
         Gson gson = new Gson();
         String data = gson.toJson(recycleMaterialDto);
 
 //        File audioFile = new File(audio);
-        File lictence = new File(license);
+//        File lictence = new File(license);
         try {
             RequestBody requestBody1 = RequestBody.create(MediaType.get("application/json"), data);
             MultipartBody.Builder builder = new MultipartBody.Builder();
@@ -177,8 +189,9 @@ public class CommitView extends BaseView implements View.OnClickListener {
                     }
                 }
             }
-            builder.addFormDataPart("licenses", lictence.getName(),
-                    RequestBody.create(MediaType.get("image/jpg"), FileUtils.getFile(license)));
+            if (license!=null&&license.mFileName!=null)
+            builder.addFormDataPart("licenses", new File(license.mFileName).getName(),
+                    RequestBody.create(MediaType.get("image/jpg"), FileUtils.getFile(license.mFileName)));
             String url = Configs.baseUrl + "/api/v1/yijiamei/recycle";
             Request request = new Request.Builder()
                     .url(url)
